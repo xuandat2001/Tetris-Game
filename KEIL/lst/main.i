@@ -12,12 +12,12 @@
 
 
 
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
-# 53 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
+# 53 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     typedef unsigned int size_t;
-# 68 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 68 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     typedef __builtin_va_list __va_list;
-# 87 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 87 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 typedef struct __fpos_t_struct {
     unsigned long long int __pos;
 
@@ -29,9 +29,9 @@ typedef struct __fpos_t_struct {
         unsigned int __state1, __state2;
     } __mbstate;
 } fpos_t;
-# 108 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 108 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 typedef struct __FILE FILE;
-# 119 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 119 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 struct __FILE {
     union {
         long __FILE_alignment;
@@ -42,10 +42,10 @@ struct __FILE {
 
     } __FILE_opaque;
 };
-# 138 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 138 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern FILE __stdin, __stdout, __stderr;
 extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
-# 224 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 224 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__nonnull__(1)));
 
 
@@ -55,7 +55,7 @@ extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__n
 
 
 extern __attribute__((__nothrow__)) int rename(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 243 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 243 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *tmpfile(void);
 
 
@@ -64,18 +64,18 @@ extern __attribute__((__nothrow__)) FILE *tmpfile(void);
 
 
 extern __attribute__((__nothrow__)) char *tmpnam(char * );
-# 265 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 265 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fclose(FILE * ) __attribute__((__nonnull__(1)));
-# 275 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 275 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fflush(FILE * );
-# 285 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 285 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *fopen(const char * __restrict ,
                            const char * __restrict ) __attribute__((__nonnull__(1,2)));
-# 329 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 329 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *freopen(const char * __restrict ,
                     const char * __restrict ,
                     FILE * __restrict ) __attribute__((__nonnull__(2,3)));
-# 342 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 342 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
                     char * __restrict ) __attribute__((__nonnull__(1)));
 
@@ -87,11 +87,11 @@ extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
 extern __attribute__((__nothrow__)) int setvbuf(FILE * __restrict ,
                    char * __restrict ,
                    int , size_t ) __attribute__((__nonnull__(1)));
-# 370 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 370 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int fprintf(FILE * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 393 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 393 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int _fprintf(FILE * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
@@ -136,7 +136,7 @@ extern __attribute__((__nothrow__)) int _sprintf(char * __restrict , const char 
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int __ARM_snprintf(char * __restrict , size_t ,
                      const char * __restrict , ...) __attribute__((__nonnull__(3)));
-# 460 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 460 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
                       const char * __restrict , ...) __attribute__((__nonnull__(3)));
@@ -148,7 +148,7 @@ extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int fscanf(FILE * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 503 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 503 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int _fscanf(FILE * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
@@ -177,11 +177,11 @@ extern __attribute__((__nothrow__)) int _scanf(const char * __restrict , ...) __
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int sscanf(const char * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 541 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 541 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int _sscanf(const char * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 555 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 555 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
 extern __attribute__((__nothrow__)) int _vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
 extern __attribute__((__nothrow__)) int _vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
@@ -203,13 +203,13 @@ extern __attribute__((__nothrow__)) int _vprintf(const char * __restrict , __va_
 
 extern __attribute__((__nothrow__)) int vfprintf(FILE * __restrict ,
                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 584 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 584 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int vsprintf(char * __restrict ,
                      const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 594 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 594 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int __ARM_vsnprintf(char * __restrict , size_t ,
                      const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 609 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 609 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _vsprintf(char * __restrict ,
                       const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
 
@@ -226,18 +226,18 @@ extern __attribute__((__nothrow__)) int _vfprintf(FILE * __restrict ,
 
 extern __attribute__((__nothrow__)) int _vsnprintf(char * __restrict , size_t ,
                       const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 635 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 635 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int __ARM_asprintf(char ** , const char * __restrict , ...) __attribute__((__nonnull__(2)));
 extern __attribute__((__nothrow__)) int __ARM_vasprintf(char ** , const char * __restrict , __va_list ) __attribute__((__nonnull__(2)));
-# 649 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 649 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fgetc(FILE * ) __attribute__((__nonnull__(1)));
-# 659 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 659 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) char *fgets(char * __restrict , int ,
                     FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 673 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 673 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fputc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 683 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 683 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * __restrict ) __attribute__((__nonnull__(1,2)));
 
 
@@ -246,13 +246,13 @@ extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * _
 
 
 extern __attribute__((__nothrow__)) int getc(FILE * ) __attribute__((__nonnull__(1)));
-# 704 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 704 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     extern __attribute__((__nothrow__)) int (getchar)(void);
-# 713 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 713 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) char *gets(char * ) __attribute__((__nonnull__(1)));
-# 725 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 725 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int putc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 737 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 737 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     extern __attribute__((__nothrow__)) int (putchar)(int );
 
 
@@ -269,26 +269,26 @@ extern __attribute__((__nothrow__)) int puts(const char * ) __attribute__((__non
 
 
 extern __attribute__((__nothrow__)) int ungetc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 778 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 778 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t fread(void * __restrict ,
                     size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 794 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 794 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t __fread_bytes_avail(void * __restrict ,
                     size_t , FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 810 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 810 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t fwrite(const void * __restrict ,
                     size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 822 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 822 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fgetpos(FILE * __restrict , fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 833 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 833 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fseek(FILE * , long int , int ) __attribute__((__nonnull__(1)));
-# 850 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 850 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fsetpos(FILE * __restrict , const fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 863 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 863 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) long int ftell(FILE * ) __attribute__((__nonnull__(1)));
-# 877 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 877 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void rewind(FILE * ) __attribute__((__nonnull__(1)));
-# 886 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 886 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void clearerr(FILE * ) __attribute__((__nonnull__(1)));
 
 
@@ -308,7 +308,7 @@ extern __attribute__((__nothrow__)) int ferror(FILE * ) __attribute__((__nonnull
 
 
 extern __attribute__((__nothrow__)) void perror(const char * );
-# 917 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 917 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnull__(1)));
 
 
@@ -439,8 +439,8 @@ IRQn_Type;
 
 
 
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
-# 56 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
+# 56 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
 typedef signed char int8_t;
 typedef signed short int int16_t;
 typedef signed int int32_t;
@@ -503,15 +503,15 @@ typedef unsigned long long uintmax_t;
 # 41 "./Library/CMSIS/Include\\cmsis_compiler.h" 3
 # 1 "./Library/CMSIS/Include\\cmsis_armclang.h" 1 3
 # 31 "./Library/CMSIS/Include\\cmsis_armclang.h" 3
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 1 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 1 3
 
 
 
 
 
 
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 1 3
-# 45 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 1 3
+# 45 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 static __inline__ void __attribute__((__always_inline__, __nodebug__)) __wfi(void) {
   __builtin_arm_wfi();
 }
@@ -554,7 +554,7 @@ __swp(uint32_t __x, volatile uint32_t *__p) {
   while (__builtin_arm_strex(__x, __p));
   return v;
 }
-# 113 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 113 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 static __inline__ void __attribute__((__always_inline__, __nodebug__)) __nop(void) {
   __builtin_arm_nop();
 }
@@ -726,7 +726,7 @@ static __inline__ int32_t __attribute__((__always_inline__,__nodebug__))
 __smulwt(int32_t __a, int32_t __b) {
   return __builtin_arm_smulwt(__a, __b);
 }
-# 300 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 300 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 static __inline__ int32_t __attribute__((__always_inline__, __nodebug__))
 __qadd(int32_t __t, int32_t __v) {
   return __builtin_arm_qadd(__t, __v);
@@ -769,7 +769,7 @@ static __inline__ int32_t __attribute__((__always_inline__, __nodebug__))
 __smlawt(int32_t __a, int32_t __b, int32_t __c) {
   return __builtin_arm_smlawt(__a, __b, __c);
 }
-# 353 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 353 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 typedef int32_t int8x4_t;
 typedef int32_t int16x2_t;
 typedef uint32_t uint8x4_t;
@@ -1015,8 +1015,8 @@ static __inline__ int32_t __attribute__((__always_inline__, __nodebug__))
 __smusdx(int16x2_t __a, int16x2_t __b) {
   return __builtin_arm_smusdx(__a, __b);
 }
-# 8 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 2 3
-# 39 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 8 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 2 3
+# 39 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
       // 7 != 6) && !__ARM_ARCH_8M_BASE__
 static __inline__ unsigned int __attribute__((__always_inline__, __nodebug__))
 __disable_fiq(void) {
@@ -1026,7 +1026,7 @@ __disable_fiq(void) {
                        "cpsid f\n"
                        : [cpsr] "=r"(cpsr));
   return cpsr & 0x1;
-# 62 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 62 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 
@@ -1039,7 +1039,7 @@ __disable_irq(void) {
                        "cpsid i\n"
                        : [cpsr] "=r"(cpsr));
   return cpsr & 0x1;
-# 89 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 89 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 
@@ -1052,7 +1052,7 @@ static __inline__ void __attribute__((__always_inline__, __nodebug__))
 __enable_fiq(void) {
 
   __asm__ __volatile__("cpsie f");
-# 109 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 109 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 
@@ -1060,7 +1060,7 @@ static __inline__ void __attribute__((__always_inline__, __nodebug__))
 __enable_irq(void) {
 
   __asm__ __volatile__("cpsie i");
-# 124 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 124 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 static __inline__ void __attribute__((__always_inline__, __nodebug__)) __force_stores(void) {
@@ -1083,7 +1083,7 @@ __semihost(int val, const void *ptr) {
 
 
       "bkpt 0xab"
-# 160 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 160 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
       : "+r"(v), "+r"(p)
       :
       : "memory", "cc");
@@ -5871,7 +5871,7 @@ void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
 # 12 "../main.c" 2
-# 23 "../main.c"
+# 25 "../main.c"
 extern volatile uint8_t Timer3_flag;
 extern volatile uint8_t Timer3_cnt;
 volatile uint8_t Timer1_flag;
@@ -5880,6 +5880,8 @@ volatile uint8_t Timer1_cnt;
 
 
 
+volatile uint8_t Timer1_flag = 0;
+volatile uint8_t Timer1_cnt = 0;
 
 void SYS_Init(void)
 {
@@ -5887,25 +5889,34 @@ void SYS_Init(void)
     SYS_UnlockReg();
 
 
-    // CLK_EnableXtalRC((0x1ul << (0)));
-  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PWRCTL |= (1 << 0);
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PWRCTL |= 1<<0 // HXT Enable Bit, write 1 to enable; // Enable HXT
 
 
-    //CLK_WaitClockReady((0x1ul << (0)));
-  while(!(((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->STATUS & 1 << 0));
+  while(!(((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->STATUS & 1 << 0 // HXT Clock Sourse Stable Flag));
 
 
-    // CLK_SetHCLK((0x0UL << (0)),(((1) - 1UL) << (0)));
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL0 &= ~(0b111 << 0); //clear
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL0 |= (0b000 << 0); //set
 
 
-    // CLK_SetCoreClock(192000000UL);
    //Configure PLL for 192 MHz
-    //((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL = 0; // Reset PLLCTL
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL &=(~(0xFFFF << 0)); // Clear PLLCTL[15:0]
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL &= (~(1 << 19)); // PLL Source is HXT
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL &= (~(1 << 16)); // PLL is in normal mode
+
+  // Configure PLL output frequency
+  // FIN = 12 MHZ; FOUT = 192 MHZ
+  // Choose:
+  // NR = 2 -> INDIV = 1
+  // NF = 32 -> FBDIV = 30
+  // NO = 2 -> OUTDIV = "01"
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL |= (1 << 9); // INDIV
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL |= (30 << 0); // FBDIV
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL &= (0b01 << 14); // OUTDIV
+
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PLLCTL &= ~(1 << 18); // PLL clock enable
+
+    while (!(((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->STATUS & 1<<2 // Internal PLL Clock Source Stable Flag)); // Wait for PLL to stabilize
 
   // Set HCLK to PLLFOUT
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL0 &= (~(0x07 << 0)); // Clear current settings for
@@ -5916,12 +5927,9 @@ void SYS_Init(void)
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKDIV0 |= (0x00 << 0); // Set new value
 
 
-    //((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PCLKDIV = (0x1UL << (0)) | (0x1UL << (4));
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PCLKDIV &= ~((0x07 << 0) | (0x07 << 4));
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->PCLKDIV |= ((0x1 << 0) | (0x1 << 4));
 
-
-    //CLK_SetModuleClock(((1UL<<30)|(1UL<<28) |(0x3UL<<25) |(24UL<<20) |(0UL<<18) |(0xFUL<<10) |(8UL<<5) |(16UL<<0)), (0x0UL << (24)), (((1) - 1UL) << (8)));
 
   // Set ((UART_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x30000UL)) clock source to HXT
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL1 &= ~(0b11 << 24); // Clear bits 25:24
@@ -5929,27 +5937,19 @@ void SYS_Init(void)
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKDIV0 &= ~(0xF << 8); // Clock divider is 1
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->APBCLK0 |= (1 << 16); // Enable ((UART_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x30000UL)) clock
 
-    //CLK_SetModuleClock(((1UL<<30)|(0x0UL<<28)|(0x0UL<<25)|(0x0UL<<20)|(0UL<<18) |(0xFFUL<<10) |(16UL<<5) |(28UL<<0)), 0, (((8) - 1UL) << (16)));
 
   // ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL)) clock source is PCLK1 96 MHz
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKDIV0 &= ~(0x0FF << 16); // Clear current settings
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKDIV0 |= (7 << 16); // ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL)) clock divider is (7+1) --> ADC clock is 96/8 = 12 MHz (Maximum is 72)
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->APBCLK0 |= (1 << 28); // enable ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL)) clock
 
-    //CLK_SetModuleClock(((1UL<<30)|(1UL<<28) |(0x7UL<<25) |(20UL<<20) |(0x0UL<<18)|(0x0UL<<10)|(0x0UL<<5)|(5UL<<0)), (0x0UL << (20)), 0);
-
+  // TM1 clock selection
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL1 &= ~ (0b111 << 12); // clear setting
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL1 |= (0b000 << 12); // Clock source from HXT
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->APBCLK0 |= (1 << 3); // Clock enable for Timer 1
 
   // ((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL)) Controller Clock Enable Bit
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->AHBCLK |= (1 << 3);
-
-
-    //CLK_EnableModuleClock(((1UL<<30)|(1UL<<28) |(0x3UL<<25) |(24UL<<20) |(0UL<<18) |(0xFUL<<10) |(8UL<<5) |(16UL<<0)));
-    //CLK_EnableModuleClock(((0UL<<30)|(0x0UL<<28)|(0x0UL<<25)|(0x0UL<<20)|(0x0UL<<18)|(0x0UL<<10)|(0x0UL<<5)|(3UL<<0)));
-    //CLK_EnableModuleClock(((1UL<<30)|(0x0UL<<28)|(0x0UL<<25)|(0x0UL<<20)|(0UL<<18) |(0xFFUL<<10) |(16UL<<5) |(28UL<<0)));
-    //CLK_EnableModuleClock(((1UL<<30)|(1UL<<28) |(0x7UL<<25) |(20UL<<20) |(0x0UL<<18)|(0x0UL<<10)|(0x0UL<<5)|(5UL<<0)));
 
 
 
@@ -5983,8 +5983,6 @@ void SYS_Init(void)
                       (0x02 << 8) | (0x02 << 12));
 
 
-    //GPIO_SetMode(((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)), (0x00000008UL) ///< Bit 3 mask of an 32 bit integer, 0x1UL);
-    // (*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(7))) + ((3)<<2)))) = 1;
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->MODE &= ~(0x3 << 6); // Clear bits 7:6
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->MODE |= (0x1 << 6); // Set bits 7:6 to 01 for push-pull ouput
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->DOUT |= (1 << 3); // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).3 high
@@ -5998,13 +5996,8 @@ void SYS_Init(void)
     ((SYS_T *) (((uint32_t)0x40000000) + 0x00000UL))->GPD_MFPH |= (0x02 << 24);
 
 
-    //GPIO_SetMode(((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)), (0x00000040UL) ///< Bit 6 mask of an 32 bit integer, 0x1UL);
-    //GPIO_SetMode(((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)), (0x00000080UL) ///< Bit 7 mask of an 32 bit integer, 0x1UL);
-    //(*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(1))) + ((6)<<2)))) = 1;
-    //(*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(1))) + ((7)<<2)))) = 0;
-
   // Clear current mode for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)).6 and ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)).7 (2 bits per pin)
-  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL))->MODE &= ~((0x3 << 12) | (0x3 << 14)); // clear the current bit
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL))->MODE &= ~((0x3 << 12) | (0x3 << 14)); // clear the current bit for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)).6 and ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)).7
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL))->MODE |= ((0x1 << 12) | (0x1 << 14)); // set the push-pull output
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL))->DOUT |= (1 << 6); // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)).6 high
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL))->DOUT &= ~(1 << 7); // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL)).7 low
@@ -6017,10 +6010,57 @@ void SYS_Init(void)
   SYS_LockReg(); // Lock the register
 }
 
+void TMR1_IRQHandler(void)
+{
+  if (((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->INTSTS & (1 << 0))
+  {
+   ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->INTSTS = (1 << 0); // Clear Timer 1 overflow flag
+
+
+   Timer1_flag = 1;
+
+
+   Timer1_cnt = Timer1_cnt + 1;
+  }
+}
+
+void Timer1_Init(void)
+{
+  // Set Prescale
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL &= ~(0xFF << 0); // clear current setting for Prescale
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (0 << 0); // Prescale = (0+1) = 1
+
+
+    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CMP = 1199999;
+
+  // Set TM1 operation mode to Periodic Mode
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL &= ~(0b11 << 27); // Clear current settings
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (0b01 << 27); // Periodic Mode
+  // The behavior selection in periodic mode is Enabled.
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 20);
+  // Enable TM1 interrup flag TIF
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 29);
+
+  // Configure Interrupt
+  // Enable TM1 interrup flag TIF
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 29);
+  // ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) ) interrupt configuration
+  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[1] |= (1 << 1); // (33 - 32 = 1)
+  // Clear Timer 1 overflow flag
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->INTSTS = (1 << 0); // Write 1 to clear TIF
+
+  // TM1 Start Counting
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 30);
+
+
+    Timer1_flag = 0;
+
+
+    Timer1_cnt = 0;
+}
+
 void UART0_Config(void)
 {
-
-    //UART_Open(((UART_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x30000UL)), 115200);
 
   // UART 0 operation configuration
   ((UART_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x30000UL))->LINE |= (0b11 << 0); // 8 data bit
@@ -6047,10 +6087,6 @@ void UART0_Config(void)
 void EBI_Config(void)
 {
 
-    //EBI_Open(0UL, 16UL, 0x3UL, 0, 0UL);
-    //((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->CTL0 |= (0x1ul << (4));
-    //((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->TCTL0 |= ((0x1ul << (23)) | (0x1ul << (22)));
-
   // Configure EBI_CTL0 for bank 0
   ((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->CTL0 &= ~((1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (0b111 << 8)); // clear the current bit
 
@@ -6066,64 +6102,17 @@ void EBI_Config(void)
         | (1 << 23); // Data Access Hold Time (tAHD) during ((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL)) writing Disabled
 
 }
-
 void GPIO_Config(void)
 {
 
-    //GPIO_SetMode(((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)), (0x00000080UL) ///< Bit 7 mask of an 32 bit integer|(0x00000040UL) ///< Bit 6 mask of an 32 bit integer, 0x1UL);
-    //(*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(7))) + ((7)<<2)))) = 1;
-    //(*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(7))) + ((6)<<2)))) = 1;
-
-  // 1. Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).7 and ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).6 as output (each pin uses 2 bits in ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->MODE)
+  // Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).7 and ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).6 as output (each pin uses 2 bits in ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->MODE)
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->MODE &= ~((0x3 << 14) | (0x3 << 12)); // Clear mode bits for ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).7 and ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).6
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->MODE |= ((0x1 << 14) | (0x1 << 12)); // Set to push-pull output mode
 
   // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).7 and ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)).6 high
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->DOUT |= (1 << 7) | (1 << 6);
-
 }
 
-void TMR1_IRQHandler(void)
-{
-
-    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->INTSTS |= (0x1ul << (0));
-
-
-    Timer1_flag = 1;
-
-
-    Timer1_cnt = Timer1_cnt + 1;
-
-}
-
-void Timer1_Init(void)
-{
-    // Set Prescale
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL &= ~(0xFF << 0); // clear current setting for Prescale
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (0 << 0); // Prescale = (0+1) = 1
-
-    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CMP = 1199999;
-   // Set TM1 operation mode to Periodic Mode
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL &= ~(0b11 << 27); // Clear current settings
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (0b01 << 27); // Periodic Mode
-  // The behavior selection in periodic mode is Enabled.
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 20);
-    // Enable TM1 interrup flag TIF
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 29);
-
-
-    __NVIC_EnableIRQ(TMR1_IRQn);
-
-  // TM1 Start Counting
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (1 << 30);
-
-
-    Timer1_flag = 0;
-
-
-    Timer1_cnt = 0;
-
-}
 void EADC_Config(void)
 {
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->CTL &= ~(1 << 8); // Single-end analog input mode
@@ -6133,7 +6122,7 @@ void EADC_Config(void)
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->CTL |= (1 << 0); // Enable ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))
   while (!(((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->PWRM & (1 << 0))); // Wait for ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL)) is ready for conversion
 
-  // Configure sample module 0 for EADC0_CH1; software trigger
+  // Configure sample module 0 for EADC0_CH1, software trigger
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->SCTL[0] &= ~(0x1F << 16); // TRGSEL = 0 -> Disable trigger or software trigger
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->SCTL[0] &= ~(0xF << 0); // Clear settings for channel selection
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->SCTL[0] |= (1 << 0); // Select EADC0_CH1
@@ -6141,6 +6130,7 @@ void EADC_Config(void)
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->STATUS2 = (1 << 0); // Clear any previous interrupt flags for sure
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->SWTRG |= (1 << 0); // Trigger conversion
 }
+
 
 
 

@@ -11,7 +11,9 @@
 #include "KEIL/gameHeader.h"
 #define RECT_WTDTH 50
 #define RECT_HIGH 100
-#define HXTSTB 1 << 0
+#define HXTSTB 1 << 0     // HXT Clock Sourse Stable Flag
+#define PLLSTB 1<<2				// Internal PLL Clock Source Stable Flag
+#define HXTEN  1<<0				// HXT Enable Bit, write 1 to enable 
 
 /*---------------------------------------------------------------------------*/
 /* Define                                                                    */
@@ -25,35 +27,46 @@ extern  volatile    uint8_t Timer3_cnt;
 volatile    uint8_t Timer1_flag;
 volatile    uint8_t Timer1_cnt;
 
-
 /*---------------------------------------------------------------------------*/
 /* Functions                                                                 */
 /*---------------------------------------------------------------------------*/
+volatile    uint8_t     Timer1_flag = 0;
+volatile    uint8_t     Timer1_cnt = 0;
+
 void SYS_Init(void)
 {
     /* Unlock protected registers */
     SYS_UnlockReg();
 
     /* Enable External XTAL (4~24 MHz) */
-    // CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-		CLK->PWRCTL |= (1 << 0);
+		CLK->PWRCTL |= HXTEN; // Enable HXT
 	
     /* Waiting for 12MHz clock ready */
-    //CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
 		while(!(CLK->STATUS & HXTSTB));
 	
     /* Switch HCLK clock source to HXT */
-    // CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HXT,CLK_CLKDIV0_HCLK(1));
 		CLK->CLKSEL0 &= ~(0b111 << 0); //clear
 		CLK->CLKSEL0 |= (0b000 << 0); //set
 
     /* Set core clock as PLL_CLOCK from PLL */
-    // CLK_SetCoreClock(FREQ_192MHZ);
 	  //Configure PLL for 192 MHz
-    //CLK->PLLCTL = 0; // Reset PLLCTL
 		CLK->PLLCTL &=(~(0xFFFF << 0));      // Clear PLLCTL[15:0]
 		CLK->PLLCTL &= (~(1 << 19)); 				// PLL Source is HXT
 		CLK->PLLCTL &= (~(1 << 16));				// PLL is in normal mode
+		
+		// Configure PLL output frequency
+		// FIN = 12 MHZ; FOUT = 192 MHZ
+		// Choose:
+		// NR = 2 -> INDIV = 1
+		// NF = 32 -> FBDIV = 30
+		// NO = 2 -> OUTDIV = "01"
+		CLK->PLLCTL |= (1 << 9); 				// INDIV
+		CLK->PLLCTL |= (30 << 0); 			// FBDIV
+		CLK->PLLCTL &= (0b01 << 14);    // OUTDIV
+		
+		CLK->PLLCTL &= ~(1 << 18);   // PLL clock enable
+    
+    while (!(CLK->STATUS & PLLSTB)); // Wait for PLL to stabilize
 
 		// Set HCLK to PLLFOUT
 		CLK->CLKSEL0 &= (~(0x07 << 0)); // Clear current settings for 
@@ -64,12 +77,9 @@ void SYS_Init(void)
 		CLK->CLKDIV0 |= (0x00 << 0);			// Set new value
 		
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    //CLK->PCLKDIV = CLK_PCLKDIV_PCLK0DIV2 | CLK_PCLKDIV_PCLK1DIV2;
 		CLK->PCLKDIV &= ~((0x07 << 0) | (0x07 << 4));
 		CLK->PCLKDIV |= ((0x1 << 0) | (0x1 << 4));
-		
-    /* Select IP clock source */
-    //CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+
 		/* UART 0 clock setting */
 		// Set UART0 clock source to HXT
 		CLK->CLKSEL1 &= ~(0b11 << 24); 		// Clear bits 25:24 
@@ -77,27 +87,19 @@ void SYS_Init(void)
 		CLK->CLKDIV0 &= ~(0xF << 8);		// Clock divider is 1
 		CLK->APBCLK0 |= (1 << 16); 			// Enable UART0 clock		
 		
-    //CLK_SetModuleClock(EADC_MODULE, 0, CLK_CLKDIV0_EADC(8));
 		/* EADC clock setting */
 		// EADC clock source is PCLK1 96 MHz
 		CLK->CLKDIV0 &= ~(0x0FF << 16);		// Clear current settings
 		CLK->CLKDIV0 |= (7 << 16); 		// EADC clock divider is (7+1) --> ADC clock is 96/8 = 12 MHz (Maximum is 72)
 		CLK->APBCLK0 |= (1 << 28); 			// enable EADC0 clock
-
-    //CLK_SetModuleClock(TMR3_MODULE, CLK_CLKSEL1_TMR3SEL_HXT, 0);
-		/* TM1 clock selection */
+		
+		// TM1 clock selection 
 		CLK->CLKSEL1 &= ~ (0b111 << 12); // clear setting
 		CLK->CLKSEL1 |= (0b000 << 12); 	// Clock source from HXT
 		CLK->APBCLK0 |= (1 << 3); 		// Clock enable for Timer 1
-		
+
 		// EBI Controller Clock Enable Bit
 		CLK->AHBCLK |= (1 << 3);  
-		
-    /* Enable IP clock */
-    //CLK_EnableModuleClock(UART0_MODULE);
-    //CLK_EnableModuleClock(EBI_MODULE);
-    //CLK_EnableModuleClock(EADC_MODULE);
-    //CLK_EnableModuleClock(TMR3_MODULE);
 
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */
@@ -131,8 +133,6 @@ void SYS_Init(void)
                       (0x02 << 8) | (0x02 << 12));
 
     /* Configure PH.3 as Output mode for LCD_RS (use GPIO PH.3 to control LCD_RS) */
-    //GPIO_SetMode(PH, BIT3, GPIO_MODE_OUTPUT);
-    // PH3 = 1;
 		PH->MODE &= ~(0x3 << 6);   // Clear bits 7:6
 		PH->MODE |=  (0x1 << 6);   // Set bits 7:6 to 01 for push-pull ouput
 		PH->DOUT |= (1 << 3); // Set PH.3 high
@@ -146,13 +146,8 @@ void SYS_Init(void)
     SYS->GPD_MFPH |= (0x02 << 24);
 
     /* Configure PB.6 and PB.7 as Output mode for LCD_RST and LCD_Backlight */
-    //GPIO_SetMode(PB, BIT6, GPIO_MODE_OUTPUT);
-    //GPIO_SetMode(PB, BIT7, GPIO_MODE_OUTPUT);
-    //PB6 = 1;
-    //PB7 = 0;
-		
 		// Clear current mode for PB.6 and PB.7 (2 bits per pin)
-		PB->MODE &= ~((0x3 << 12) | (0x3 << 14)); // clear the current bit
+		PB->MODE &= ~((0x3 << 12) | (0x3 << 14)); // clear the current bit for PB.6 and PB.7
 		PB->MODE |=  ((0x1 << 12) | (0x1 << 14)); // set the push-pull output
 		PB->DOUT |= (1 << 6);  // Set PB.6 high
 		PB->DOUT &= ~(1 << 7); // Set PB.7 low
@@ -165,11 +160,58 @@ void SYS_Init(void)
 		SYS_LockReg(); // Lock the register
 }
 
+void TMR1_IRQHandler(void)
+{
+		if (TIMER1->INTSTS & (1 << 0))
+		{
+			TIMER1->INTSTS = (1 << 0); // Clear Timer 1 overflow flag	
+			
+			/* Set Timer1_flag = 1 */
+			Timer1_flag = 1;
+
+			/* Timer1_cnt + 1 */
+			Timer1_cnt = Timer1_cnt + 1;
+		}
+}
+
+void Timer1_Init(void)
+{
+		// Set Prescale
+		TIMER1->CTL &= ~(0xFF << 0); // clear current setting for Prescale
+		TIMER1->CTL |= (0 << 0); // Prescale = (0+1) = 1
+	
+    /*( 1/12MHz * 1200000) - 1 = 100ms */
+    TIMER1->CMP = 1199999;
+	
+		// Set TM1 operation mode to Periodic Mode
+		TIMER1->CTL &= ~(0b11 << 27); // Clear current settings
+		TIMER1->CTL |= (0b01 << 27);	// Periodic Mode
+		// The behavior selection in periodic mode is Enabled.
+		TIMER1->CTL |= (1 << 20);
+		// Enable TM1 interrup flag TIF
+		TIMER1->CTL |= (1 << 29);
+
+		// Configure Interrupt
+		// Enable TM1 interrup flag TIF
+		TIMER1->CTL |= (1 << 29);
+		// NVIC interrupt configuration
+		NVIC->ISER[1] |= (1 << 1); // (33 - 32 = 1)
+		// Clear Timer 1 overflow flag
+		TIMER1->INTSTS = (1 << 0); // Write 1 to clear TIF
+		
+		// TM1 Start Counting
+		TIMER1->CTL |= (1 << 30);
+
+    /* Clear Timer1_flag */
+    Timer1_flag = 0;
+
+    /* Reset Timer1_cnt */
+    Timer1_cnt = 0;
+}
+
 void UART0_Config(void)
 {
-    /* Init UART to 115200-8n1 for print message */
-    //UART_Open(UART0, 115200);
-	
+    /* Init UART to 115200-8n1 for print message */	
 		// UART 0 operation configuration
 		UART0->LINE |= (0b11 << 0); 			// 8 data bit
 		UART0->LINE &= ~(1 << 2); 				// One stop bit
@@ -187,18 +229,14 @@ void UART0_Config(void)
 										| 6); 			 // BRD = 6 
 		
 		/* Calucation backward the Baud rate to check
-		Baud Rate = UART_CLK / [ (EDIVM1 + 1) × (BRD + 2) ]
-          = 12,000,000 / [13 × 8]
+		Baud Rate = UART_CLK / [ (EDIVM1 + 1) ? (BRD + 2) ]
+          = 12,000,000 / [13 ? 8]
           = 12,000,000 / 104
-          ˜ 115,384.6 bps */
+          = 115,384.6 bps */
 }
 void EBI_Config(void)
 {
 	  /* Initialize EBI bank0 to access external LCD Module */
-    //EBI_Open(EBI_BANK0, EBI_BUSWIDTH_16BIT, EBI_TIMING_NORMAL, 0, EBI_CS_ACTIVE_LOW);
-    //EBI->CTL0 |= EBI_CTL0_CACCESS_Msk;
-    //EBI->TCTL0 |= (EBI_TCTL0_WAHDOFF_Msk | EBI_TCTL0_RAHDOFF_Msk);
-	
 		// Configure EBI_CTL0 for bank 0
 		EBI->CTL0 &= ~((1 << 0) | (1 << 1) | (1 << 2) | (1 << 3) | (1 << 4) | (0b111 << 8)); // clear the current bit
 	
@@ -214,64 +252,17 @@ void EBI_Config(void)
 								| (1 << 23);  // Data Access Hold Time (tAHD) during EBI writing Disabled
 	
 }
-	
 void GPIO_Config(void)
 {
 	  /* Set PH7/PH6 as output mode for LED1/LED2 */
-    //GPIO_SetMode(PH, BIT7|BIT6, GPIO_MODE_OUTPUT);
-    //PH7 = 1;
-    //PH6 = 1;
-
-		// 1. Configure PH.7 and PH.6 as output (each pin uses 2 bits in PH->MODE)
+		// Configure PH.7 and PH.6 as output (each pin uses 2 bits in PH->MODE)
 		PH->MODE &= ~((0x3 << 14) | (0x3 << 12));  // Clear mode bits for PH.7 and PH.6
 		PH->MODE |=  ((0x1 << 14) | (0x1 << 12));  // Set to push-pull output mode 
 
 		// Set PH.7 and PH.6 high
 		PH->DOUT |= (1 << 7) | (1 << 6);
-
 }
 
-void TMR1_IRQHandler(void)
-{
-    /* Clear timer interrupt flag */
-    TIMER1->INTSTS |= TIMER_INTSTS_TIF_Msk;
-
-    /* Set Timer1_flag = 1 */
-    Timer1_flag = 1;
-
-    /* Timer1_cnt + 1 */
-    Timer1_cnt = Timer1_cnt + 1;
-
-}
-
-void Timer1_Init(void)
-{
-				// Set Prescale
-		TIMER1->CTL &= ~(0xFF << 0); // clear current setting for Prescale
-		TIMER1->CTL |= (0 << 0); // Prescale = (0+1) = 1 
-    /*( 1/12MHz * 1200000) - 1 = 100ms */
-    TIMER1->CMP = 1199999;
-			// Set TM1 operation mode to Periodic Mode
-		TIMER1->CTL &= ~(0b11 << 27); // Clear current settings
-		TIMER1->CTL |= (0b01 << 27);	// Periodic Mode
-		// The behavior selection in periodic mode is Enabled.
-		TIMER1->CTL |= (1 << 20);
-				// Enable TM1 interrup flag TIF
-		TIMER1->CTL |= (1 << 29);
-
-    /* Enable Timer1 IRQ */
-    NVIC_EnableIRQ(TMR1_IRQn);
-
-		// TM1 Start Counting
-		TIMER1->CTL |= (1 << 30);
-
-    /* Clear Timer1_flag */
-    Timer1_flag = 0;
-
-    /* Reset Timer1_cnt */
-    Timer1_cnt = 0;
-
-}
 void EADC_Config(void)
 {
 		EADC->CTL &= ~(1 << 8);  // Single-end analog input mode
@@ -281,7 +272,7 @@ void EADC_Config(void)
 		EADC->CTL |= (1 << 0);						// Enable EADC
 		while (!(EADC0->PWRM & (1 << 0)));			// Wait for EADC is ready for conversion
 	
-		// Configure sample module 0 for EADC0_CH1; software trigger
+		// Configure sample module 0 for EADC0_CH1, software trigger
 		EADC->SCTL[0] &= ~(0x1F << 16);		// TRGSEL = 0 -> Disable trigger or software trigger
 		EADC->SCTL[0] &= ~(0xF << 0);		// Clear settings for channel selection
 		EADC->SCTL[0] |= (1 << 0);			// Select EADC0_CH1
@@ -289,6 +280,7 @@ void EADC_Config(void)
 		EADC->STATUS2 = (1 << 0);			// Clear any previous interrupt flags for sure	
 		EADC->SWTRG |= (1 << 0);               // Trigger conversion
 }
+
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/

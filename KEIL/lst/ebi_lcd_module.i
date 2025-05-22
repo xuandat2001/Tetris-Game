@@ -13,12 +13,12 @@
 
 
 
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
-# 53 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
+# 53 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     typedef unsigned int size_t;
-# 68 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 68 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     typedef __builtin_va_list __va_list;
-# 87 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 87 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 typedef struct __fpos_t_struct {
     unsigned long long int __pos;
 
@@ -30,9 +30,9 @@ typedef struct __fpos_t_struct {
         unsigned int __state1, __state2;
     } __mbstate;
 } fpos_t;
-# 108 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 108 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 typedef struct __FILE FILE;
-# 119 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 119 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 struct __FILE {
     union {
         long __FILE_alignment;
@@ -43,10 +43,10 @@ struct __FILE {
 
     } __FILE_opaque;
 };
-# 138 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 138 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern FILE __stdin, __stdout, __stderr;
 extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
-# 224 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 224 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__nonnull__(1)));
 
 
@@ -56,7 +56,7 @@ extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__n
 
 
 extern __attribute__((__nothrow__)) int rename(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 243 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 243 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *tmpfile(void);
 
 
@@ -65,18 +65,18 @@ extern __attribute__((__nothrow__)) FILE *tmpfile(void);
 
 
 extern __attribute__((__nothrow__)) char *tmpnam(char * );
-# 265 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 265 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fclose(FILE * ) __attribute__((__nonnull__(1)));
-# 275 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 275 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fflush(FILE * );
-# 285 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 285 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *fopen(const char * __restrict ,
                            const char * __restrict ) __attribute__((__nonnull__(1,2)));
-# 329 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 329 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *freopen(const char * __restrict ,
                     const char * __restrict ,
                     FILE * __restrict ) __attribute__((__nonnull__(2,3)));
-# 342 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 342 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
                     char * __restrict ) __attribute__((__nonnull__(1)));
 
@@ -88,11 +88,11 @@ extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
 extern __attribute__((__nothrow__)) int setvbuf(FILE * __restrict ,
                    char * __restrict ,
                    int , size_t ) __attribute__((__nonnull__(1)));
-# 370 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 370 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int fprintf(FILE * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 393 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 393 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int _fprintf(FILE * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
@@ -137,7 +137,7 @@ extern __attribute__((__nothrow__)) int _sprintf(char * __restrict , const char 
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int __ARM_snprintf(char * __restrict , size_t ,
                      const char * __restrict , ...) __attribute__((__nonnull__(3)));
-# 460 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 460 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
                       const char * __restrict , ...) __attribute__((__nonnull__(3)));
@@ -149,7 +149,7 @@ extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int fscanf(FILE * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 503 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 503 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int _fscanf(FILE * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
@@ -178,11 +178,11 @@ extern __attribute__((__nothrow__)) int _scanf(const char * __restrict , ...) __
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int sscanf(const char * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 541 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 541 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int _sscanf(const char * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 555 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 555 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
 extern __attribute__((__nothrow__)) int _vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
 extern __attribute__((__nothrow__)) int _vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
@@ -204,13 +204,13 @@ extern __attribute__((__nothrow__)) int _vprintf(const char * __restrict , __va_
 
 extern __attribute__((__nothrow__)) int vfprintf(FILE * __restrict ,
                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 584 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 584 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int vsprintf(char * __restrict ,
                      const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 594 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 594 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int __ARM_vsnprintf(char * __restrict , size_t ,
                      const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 609 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 609 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _vsprintf(char * __restrict ,
                       const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
 
@@ -227,18 +227,18 @@ extern __attribute__((__nothrow__)) int _vfprintf(FILE * __restrict ,
 
 extern __attribute__((__nothrow__)) int _vsnprintf(char * __restrict , size_t ,
                       const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 635 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 635 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int __ARM_asprintf(char ** , const char * __restrict , ...) __attribute__((__nonnull__(2)));
 extern __attribute__((__nothrow__)) int __ARM_vasprintf(char ** , const char * __restrict , __va_list ) __attribute__((__nonnull__(2)));
-# 649 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 649 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fgetc(FILE * ) __attribute__((__nonnull__(1)));
-# 659 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 659 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) char *fgets(char * __restrict , int ,
                     FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 673 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 673 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fputc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 683 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 683 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * __restrict ) __attribute__((__nonnull__(1,2)));
 
 
@@ -247,13 +247,13 @@ extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * _
 
 
 extern __attribute__((__nothrow__)) int getc(FILE * ) __attribute__((__nonnull__(1)));
-# 704 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 704 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     extern __attribute__((__nothrow__)) int (getchar)(void);
-# 713 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 713 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) char *gets(char * ) __attribute__((__nonnull__(1)));
-# 725 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 725 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int putc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 737 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 737 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     extern __attribute__((__nothrow__)) int (putchar)(int );
 
 
@@ -270,26 +270,26 @@ extern __attribute__((__nothrow__)) int puts(const char * ) __attribute__((__non
 
 
 extern __attribute__((__nothrow__)) int ungetc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 778 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 778 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t fread(void * __restrict ,
                     size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 794 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 794 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t __fread_bytes_avail(void * __restrict ,
                     size_t , FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 810 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 810 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t fwrite(const void * __restrict ,
                     size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 822 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 822 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fgetpos(FILE * __restrict , fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 833 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 833 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fseek(FILE * , long int , int ) __attribute__((__nonnull__(1)));
-# 850 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 850 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fsetpos(FILE * __restrict , const fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 863 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 863 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) long int ftell(FILE * ) __attribute__((__nonnull__(1)));
-# 877 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 877 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void rewind(FILE * ) __attribute__((__nonnull__(1)));
-# 886 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 886 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void clearerr(FILE * ) __attribute__((__nonnull__(1)));
 
 
@@ -309,7 +309,7 @@ extern __attribute__((__nothrow__)) int ferror(FILE * ) __attribute__((__nonnull
 
 
 extern __attribute__((__nothrow__)) void perror(const char * );
-# 917 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 917 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnull__(1)));
 
 
@@ -317,8 +317,8 @@ extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnu
 extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
 extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
 # 10 "../EBI_LCD_Module.c" 2
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 1 3
-# 58 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 1 3
+# 58 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) void *memcpy(void * __restrict ,
                     const void * __restrict , size_t ) __attribute__((__nonnull__(1,2)));
 
@@ -329,7 +329,7 @@ extern __attribute__((__nothrow__)) void *memcpy(void * __restrict ,
 
 extern __attribute__((__nothrow__)) void *memmove(void * ,
                     const void * , size_t ) __attribute__((__nonnull__(1,2)));
-# 77 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 77 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strcpy(char * __restrict , const char * __restrict ) __attribute__((__nonnull__(1,2)));
 
 
@@ -338,7 +338,7 @@ extern __attribute__((__nothrow__)) char *strcpy(char * __restrict , const char 
 
 
 extern __attribute__((__nothrow__)) char *strncpy(char * __restrict , const char * __restrict , size_t ) __attribute__((__nonnull__(1,2)));
-# 93 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 93 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strcat(char * __restrict , const char * __restrict ) __attribute__((__nonnull__(1,2)));
 
 
@@ -347,7 +347,7 @@ extern __attribute__((__nothrow__)) char *strcat(char * __restrict , const char 
 
 
 extern __attribute__((__nothrow__)) char *strncat(char * __restrict , const char * __restrict , size_t ) __attribute__((__nonnull__(1,2)));
-# 117 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 117 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) int memcmp(const void * , const void * , size_t ) __attribute__((__nonnull__(1,2)));
 
 
@@ -364,7 +364,7 @@ extern __attribute__((__nothrow__)) int strcmp(const char * , const char * ) __a
 
 
 extern __attribute__((__nothrow__)) int strncmp(const char * , const char * , size_t ) __attribute__((__nonnull__(1,2)));
-# 141 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 141 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) int strcasecmp(const char * , const char * ) __attribute__((__nonnull__(1,2)));
 
 
@@ -374,28 +374,28 @@ extern __attribute__((__nothrow__)) int strcasecmp(const char * , const char * )
 
 
 extern __attribute__((__nothrow__)) int strncasecmp(const char * , const char * , size_t ) __attribute__((__nonnull__(1,2)));
-# 158 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 158 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) int strcoll(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 169 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 169 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) size_t strxfrm(char * __restrict , const char * __restrict , size_t ) __attribute__((__nonnull__(2)));
-# 193 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 193 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) void *memchr(const void * , int , size_t ) __attribute__((__nonnull__(1)));
-# 209 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 209 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strchr(const char * , int ) __attribute__((__nonnull__(1)));
-# 218 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 218 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) size_t strcspn(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 232 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 232 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strpbrk(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 247 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 247 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strrchr(const char * , int ) __attribute__((__nonnull__(1)));
-# 257 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 257 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) size_t strspn(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 270 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 270 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strstr(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 280 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 280 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) char *strtok(char * __restrict , const char * __restrict ) __attribute__((__nonnull__(2)));
 extern __attribute__((__nothrow__)) char *_strtok_r(char * , const char * , char ** ) __attribute__((__nonnull__(2,3)));
-# 321 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 321 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) void *memset(void * , int , size_t ) __attribute__((__nonnull__(1)));
 
 
@@ -425,9 +425,9 @@ extern __attribute__((__nothrow__)) size_t strnlen(const char * , size_t ) __att
 
 
 extern __attribute__((__nothrow__)) size_t strlcpy(char * , const char * , size_t ) __attribute__((__nonnull__(1,2)));
-# 369 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 369 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) size_t strlcat(char * , const char * , size_t ) __attribute__((__nonnull__(1,2)));
-# 395 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
+# 395 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\string.h" 3
 extern __attribute__((__nothrow__)) void _membitcpybl(void * , const void * , int , int , size_t ) __attribute__((__nonnull__(1,2)));
 extern __attribute__((__nothrow__)) void _membitcpybb(void * , const void * , int , int , size_t ) __attribute__((__nonnull__(1,2)));
 extern __attribute__((__nothrow__)) void _membitcpyhl(void * , const void * , int , int , size_t ) __attribute__((__nonnull__(1,2)));
@@ -441,8 +441,8 @@ extern __attribute__((__nothrow__)) void _membitmovehb(void * , const void * , i
 extern __attribute__((__nothrow__)) void _membitmovewl(void * , const void * , int , int , size_t ) __attribute__((__nonnull__(1,2)));
 extern __attribute__((__nothrow__)) void _membitmovewb(void * , const void * , int , int , size_t ) __attribute__((__nonnull__(1,2)));
 # 11 "../EBI_LCD_Module.c" 2
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 1 3
-# 91 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 1 3
+# 91 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
     typedef unsigned short wchar_t;
 
 
@@ -451,9 +451,9 @@ extern __attribute__((__nothrow__)) void _membitmovewb(void * , const void * , i
 typedef struct div_t { int quot, rem; } div_t;
 
 typedef struct ldiv_t { long int quot, rem; } ldiv_t;
-# 139 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 139 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int __aeabi_MB_CUR_MAX(void);
-# 158 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 158 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) double atof(const char * ) __attribute__((__nonnull__(1)));
 
 
@@ -467,15 +467,15 @@ extern __attribute__((__nothrow__)) int atoi(const char * ) __attribute__((__non
 
 
 extern __attribute__((__nothrow__)) long int atol(const char * ) __attribute__((__nonnull__(1)));
-# 185 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 185 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) double strtod(const char * __restrict , char ** __restrict ) __attribute__((__nonnull__(1)));
-# 212 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 212 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) long int strtol(const char * __restrict ,
                         char ** __restrict , int ) __attribute__((__nonnull__(1)));
-# 243 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 243 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) unsigned long int strtoul(const char * __restrict ,
                                        char ** __restrict , int ) __attribute__((__nonnull__(1)));
-# 275 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 275 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) long long strtoll(const char * __restrict ,
                                   char ** __restrict , int )
                           __attribute__((__nonnull__(1)));
@@ -495,9 +495,9 @@ extern __attribute__((__nothrow__)) unsigned long long strtoull(const char * __r
 
 
 extern __attribute__((__nothrow__)) int rand(void);
-# 303 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 303 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) void srand(unsigned int );
-# 313 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 313 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 struct _rand_state { int __x[57]; };
 extern __attribute__((__nothrow__)) int _rand_r(struct _rand_state *);
 extern __attribute__((__nothrow__)) void _srand_r(struct _rand_state *, unsigned int);
@@ -530,35 +530,35 @@ extern __attribute__((__nothrow__)) void *malloc(size_t );
 
 
 extern __attribute__((__nothrow__)) void *realloc(void * , size_t );
-# 374 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 374 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 typedef int (*__heapprt)(void *, char const *, ...);
 extern __attribute__((__nothrow__)) void __heapstats(int (* )(void * ,
                                            char const * , ...),
                         void * ) __attribute__((__nonnull__(1)));
-# 390 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 390 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int __heapvalid(int (* )(void * ,
                                            char const * , ...),
                        void * , int ) __attribute__((__nonnull__(1)));
-# 411 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 411 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__noreturn__)) void abort(void);
-# 422 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 422 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int atexit(void (* )(void)) __attribute__((__nonnull__(1)));
-# 444 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 444 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__noreturn__)) void exit(int );
-# 460 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 460 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__noreturn__)) void _Exit(int );
-# 471 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 471 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) char *getenv(const char * ) __attribute__((__nonnull__(1)));
-# 484 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 484 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int system(const char * );
-# 497 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 497 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern void *bsearch(const void * , const void * ,
               size_t , size_t ,
               int (* )(const void *, const void *)) __attribute__((__nonnull__(1,2,5)));
-# 532 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 532 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern void qsort(void * , size_t , size_t ,
            int (* )(const void *, const void *)) __attribute__((__nonnull__(1,4)));
-# 560 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 560 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__const__)) int abs(int );
 
 
@@ -567,11 +567,11 @@ extern __attribute__((__nothrow__)) __attribute__((__const__)) int abs(int );
 
 
 extern __attribute__((__nothrow__)) __attribute__((__const__)) div_t div(int , int );
-# 579 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 579 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__const__)) long int labs(long int );
-# 589 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 589 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__const__)) ldiv_t ldiv(long int , long int );
-# 644 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 644 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 typedef struct __sdiv32by16 { long quot, rem; } __sdiv32by16;
 typedef struct __udiv32by16 { unsigned long quot, rem; } __udiv32by16;
 
@@ -600,20 +600,20 @@ __attribute__((__value_in_regs__)) extern __attribute__((__nothrow__)) __attribu
 
 
 extern __attribute__((__nothrow__)) unsigned int __fp_status(unsigned int , unsigned int );
-# 705 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 705 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int mblen(const char * , size_t );
-# 720 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 720 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int mbtowc(wchar_t * __restrict ,
                    const char * __restrict , size_t );
-# 739 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 739 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) int wctomb(char * , wchar_t );
-# 761 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 761 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) size_t mbstowcs(wchar_t * __restrict ,
                       const char * __restrict , size_t ) __attribute__((__nonnull__(2)));
-# 779 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 779 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) size_t wcstombs(char * __restrict ,
                       const wchar_t * __restrict , size_t ) __attribute__((__nonnull__(2)));
-# 798 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+# 798 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
 extern __attribute__((__nothrow__)) void __use_realtime_heap(void);
 extern __attribute__((__nothrow__)) void __use_realtime_division(void);
 extern __attribute__((__nothrow__)) void __use_two_region_memory(void);
@@ -746,8 +746,8 @@ IRQn_Type;
 
 
 
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
-# 56 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
+# 56 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
 typedef signed char int8_t;
 typedef signed short int int16_t;
 typedef signed int int32_t;
@@ -810,15 +810,15 @@ typedef unsigned long long uintmax_t;
 # 41 "./Library/CMSIS/Include\\cmsis_compiler.h" 3
 # 1 "./Library/CMSIS/Include\\cmsis_armclang.h" 1 3
 # 31 "./Library/CMSIS/Include\\cmsis_armclang.h" 3
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 1 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 1 3
 
 
 
 
 
 
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 1 3
-# 45 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 1 3
+# 45 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 static __inline__ void __attribute__((__always_inline__, __nodebug__)) __wfi(void) {
   __builtin_arm_wfi();
 }
@@ -861,7 +861,7 @@ __swp(uint32_t __x, volatile uint32_t *__p) {
   while (__builtin_arm_strex(__x, __p));
   return v;
 }
-# 113 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 113 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 static __inline__ void __attribute__((__always_inline__, __nodebug__)) __nop(void) {
   __builtin_arm_nop();
 }
@@ -1033,7 +1033,7 @@ static __inline__ int32_t __attribute__((__always_inline__,__nodebug__))
 __smulwt(int32_t __a, int32_t __b) {
   return __builtin_arm_smulwt(__a, __b);
 }
-# 300 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 300 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 static __inline__ int32_t __attribute__((__always_inline__, __nodebug__))
 __qadd(int32_t __t, int32_t __v) {
   return __builtin_arm_qadd(__t, __v);
@@ -1076,7 +1076,7 @@ static __inline__ int32_t __attribute__((__always_inline__, __nodebug__))
 __smlawt(int32_t __a, int32_t __b, int32_t __c) {
   return __builtin_arm_smlawt(__a, __b, __c);
 }
-# 353 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
+# 353 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_acle.h" 3
 typedef int32_t int8x4_t;
 typedef int32_t int16x2_t;
 typedef uint32_t uint8x4_t;
@@ -1322,8 +1322,8 @@ static __inline__ int32_t __attribute__((__always_inline__, __nodebug__))
 __smusdx(int16x2_t __a, int16x2_t __b) {
   return __builtin_arm_smusdx(__a, __b);
 }
-# 8 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 2 3
-# 39 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 8 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 2 3
+# 39 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
       // 7 != 6) && !__ARM_ARCH_8M_BASE__
 static __inline__ unsigned int __attribute__((__always_inline__, __nodebug__))
 __disable_fiq(void) {
@@ -1333,7 +1333,7 @@ __disable_fiq(void) {
                        "cpsid f\n"
                        : [cpsr] "=r"(cpsr));
   return cpsr & 0x1;
-# 62 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 62 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 
@@ -1346,7 +1346,7 @@ __disable_irq(void) {
                        "cpsid i\n"
                        : [cpsr] "=r"(cpsr));
   return cpsr & 0x1;
-# 89 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 89 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 
@@ -1359,7 +1359,7 @@ static __inline__ void __attribute__((__always_inline__, __nodebug__))
 __enable_fiq(void) {
 
   __asm__ __volatile__("cpsie f");
-# 109 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 109 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 
@@ -1367,7 +1367,7 @@ static __inline__ void __attribute__((__always_inline__, __nodebug__))
 __enable_irq(void) {
 
   __asm__ __volatile__("cpsie i");
-# 124 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 124 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
 }
 
 static __inline__ void __attribute__((__always_inline__, __nodebug__)) __force_stores(void) {
@@ -1390,7 +1390,7 @@ __semihost(int val, const void *ptr) {
 
 
       "bkpt 0xab"
-# 160 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
+# 160 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\arm_compat.h" 3
       : "+r"(v), "+r"(p)
       :
       : "memory", "cc");
@@ -6128,8 +6128,8 @@ void HSUSBD_SetVendorRequest(HSUSBD_VENDOR_REQ pfnVendorReq);
 # 707 "./Library/Device/Nuvoton/M480/Include\\M480.h" 2
 # 13 "./Library/Device/Nuvoton/M480/Include\\NuMicro.h" 2
 # 13 "../EBI_LCD_Module.c" 2
-# 1 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 1 3
-# 290 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 1 3
+# 290 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 extern __attribute__((__nothrow__)) double acos(double );
 
 
@@ -6231,7 +6231,7 @@ extern __attribute__((__nothrow__)) double pow(double , double );
 
 
 extern __attribute__((__nothrow__)) double sqrt(double );
-# 410 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 410 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
     static __inline double _sqrt(double __x) { return sqrt(__x); }
 
 
@@ -6248,7 +6248,7 @@ extern __attribute__((__nothrow__)) double sqrt(double );
     }
 
     static __inline float _sqrtf(float __x) { return __sqrtf(__x); }
-# 435 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 435 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__const__)) double ceil(double );
 
 
@@ -6261,7 +6261,7 @@ extern __attribute__((__nothrow__)) __attribute__((__const__)) double floor(doub
 
 
 extern __attribute__((__nothrow__)) double fmod(double , double );
-# 740 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 740 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__const__)) float fabsf(float);
 static __inline __attribute__((__nothrow__)) __attribute__((__const__)) float _fabsf(float __f) { return fabsf(__f); }
 extern __attribute__((__nothrow__)) float sinf(float );
@@ -6285,7 +6285,7 @@ extern __attribute__((__nothrow__)) __attribute__((__const__)) float ceilf(float
 extern __attribute__((__nothrow__)) __attribute__((__const__)) float floorf(float );
 extern __attribute__((__nothrow__)) float fmodf(float , float );
 extern __attribute__((__nothrow__)) float modff(float , float * ) __attribute__((__nonnull__(2)));
-# 780 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 780 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 __attribute__((__nothrow__)) long double acosl(long double );
 __attribute__((__nothrow__)) long double asinl(long double );
 __attribute__((__nothrow__)) long double atanl(long double );
@@ -6308,14 +6308,14 @@ __attribute__((__nothrow__)) long double sinhl(long double );
 __attribute__((__nothrow__)) long double sqrtl(long double );
 __attribute__((__nothrow__)) long double tanl(long double );
 __attribute__((__nothrow__)) long double tanhl(long double );
-# 840 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 840 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 extern __attribute__((__nothrow__)) double exp2(double );
 extern __attribute__((__nothrow__)) float exp2f(float );
 __attribute__((__nothrow__)) long double exp2l(long double );
 extern __attribute__((__nothrow__)) double fdim(double , double );
 extern __attribute__((__nothrow__)) float fdimf(float , float );
 __attribute__((__nothrow__)) long double fdiml(long double , long double );
-# 855 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 855 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 extern __attribute__((__nothrow__)) double fma(double , double , double );
 extern __attribute__((__nothrow__)) float fmaf(float , float , float );
 
@@ -6359,7 +6359,7 @@ extern __attribute__((__nothrow__)) __attribute__((__const__)) double nan(const 
 extern __attribute__((__nothrow__)) __attribute__((__const__)) float nanf(const char * );
 
 static __inline __attribute__((__nothrow__)) __attribute__((__const__)) long double nanl(const char *__t) { return (long double)nan(__t); }
-# 908 "C:\\Users\\pcx.vn\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
+# 908 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\math.h" 3
 extern __attribute__((__nothrow__)) __attribute__((__const__)) double nearbyint(double );
 extern __attribute__((__nothrow__)) __attribute__((__const__)) float nearbyintf(float );
 __attribute__((__nothrow__)) long double nearbyintl(long double );
