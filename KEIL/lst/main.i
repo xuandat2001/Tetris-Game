@@ -5844,7 +5844,7 @@ uint16_t Get_TP_Y(void);
 // Custom
 # 11 "../main.c" 2
 # 1 "..\\KEIL/gameHeader.h" 1
-# 23 "..\\KEIL/gameHeader.h"
+# 25 "..\\KEIL/gameHeader.h"
 // Define colors (RGB565)
 
 
@@ -5871,11 +5871,29 @@ void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
 # 12 "../main.c" 2
-# 25 "../main.c"
+# 1 "..\\KEIL/gameState.h" 1
+
+
+
+typedef enum uint8_t {
+    STATE_WELCOME,
+    STATE_WAIT_FOR_START,
+    STATE_PLAY,
+    STATE_PAUSE,
+    STATE_GAME_OVER,
+    STATE_HIGH_SCORE
+} GameState;
+
+extern GameState currentState;
+
+void SetState(GameState newState);
+void UpdateGameState(void);
+# 13 "../main.c" 2
+# 26 "../main.c"
 extern volatile uint8_t Timer3_flag;
 extern volatile uint8_t Timer3_cnt;
-volatile uint8_t Timer1_flag;
-volatile uint8_t Timer1_cnt;
+//volatile uint8_t Timer1_flag;
+//volatile uint8_t Timer1_cnt;
 
 
 
@@ -6130,6 +6148,63 @@ void EADC_Config(void)
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->STATUS2 = (1 << 0); // Clear any previous interrupt flags for sure
   ((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->SWTRG |= (1 << 0); // Trigger conversion
 }
+void SW1_Interrupt_Setup(void)
+{
+  //Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0 (SW1) as input mode
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->MODE &= ~(0x3 << 0); // Clear bits [1:0] for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0
+
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTTYPE &= ~(1 << 0); // Edge trigger interrupt for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTEN |= (1 << 0); // Falling edge interrupt enable
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC |= (1 << 0); // Clear any pending interrupt flag for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0
+
+  // ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) ) interrupt configuration
+  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[0] |= (1 << 16); // Enable ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) ) for the ((GPIO_DBCTL_T *) (((uint32_t)0x40000000) + 0x04440UL)) interrupt on Port A
+}
+
+
+void GPA_IRQHandler(void)
+{
+ if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC & (1 << 0)) // Check if the interrupt is from ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0 (SW1)
+    {
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC |= (1 << 0); // Clear the interrupt flag
+
+    }
+}
+
+void Joystick_Init(void)
+{
+    // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2(UP), ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4(RIGHT) as input mode
+    ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->MODE &= ~((0x3 << 4) | (0x3 << 8)); // ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2, ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PUSEL &= ~((0x3 << 4) |
+         (0x3 << 8));
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PUSEL |= ((0x1 << 4) |
+         (0x1 << 8));
+
+    // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9(LEFT) and ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10(DOWN) as input mode
+    ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->MODE &= ~((0x3 << 18) | (0x3 << 20)); // ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9, ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PUSEL &= ~((0x3 << 18) |
+          (0x3 << 20));
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PUSEL |= ((0x1 << 18) |
+          (0x1 << 20));
+}
+
+void Joystick_Polling_Read(void)
+{
+    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PIN & (1 << 2))) // UP
+        printf("Joystick UP pressed\n");
+    //((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->DOUT |= (1 << 6); // toggle LED2
+
+    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PIN & (1 << 4))) // RIGHT
+        printf("Joystick RIGHT pressed\n");
+    //((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->DOUT ^= (1 << 7); // toggle LED1
+
+    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PIN & (1 << 10))) // DOWN
+        printf("Joystick DOWN pressed\n");
+
+    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PIN & (1 << 9))) // LEFT
+        printf("Joystick LEFT pressed\n");
+}
+
 
 
 
@@ -6150,6 +6225,7 @@ int32_t main(void)
 
 
     SYS_Init();
+  Joystick_Init();
 
 
     //UART_Open(((UART_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x30000UL)), 115200);
@@ -6213,6 +6289,9 @@ int32_t main(void)
 
         if(Timer1_flag == 1) {
             Timer1_flag = 0;
+
+      Joystick_Polling_Read();
+
 
             x = Get_TP_X();
             y = Get_TP_Y();

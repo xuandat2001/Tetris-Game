@@ -9,6 +9,7 @@
 #include "NuMicro.h"
 #include "EBI_LCD_Module.h"
 #include "KEIL/gameHeader.h"
+#include "KEIL/gameState.h"
 #define RECT_WTDTH 50
 #define RECT_HIGH 100
 #define HXTSTB 1 << 0     // HXT Clock Sourse Stable Flag
@@ -24,8 +25,8 @@
 /*---------------------------------------------------------------------------*/
 extern  volatile    uint8_t Timer3_flag;
 extern  volatile    uint8_t Timer3_cnt;
-volatile    uint8_t Timer1_flag;
-volatile    uint8_t Timer1_cnt;
+//volatile    uint8_t Timer1_flag;
+//volatile    uint8_t Timer1_cnt;
 
 /*---------------------------------------------------------------------------*/
 /* Functions                                                                 */
@@ -280,6 +281,63 @@ void EADC_Config(void)
 		EADC->STATUS2 = (1 << 0);			// Clear any previous interrupt flags for sure	
 		EADC->SWTRG |= (1 << 0);               // Trigger conversion
 }
+void SW1_Interrupt_Setup(void)
+{
+		//Configure PA.0 (SW1) as input mode
+		PA->MODE &= ~(0x3 << 0); 		// Clear bits [1:0] for PA.0
+
+		PA->INTTYPE &= ~(1 << 0); 		// Edge trigger interrupt for PA.0
+		PA->INTEN |= (1 << 0); 		// Falling edge interrupt enable
+		PA->INTSRC |= (1 << 0);		// Clear any pending interrupt flag for PA.0
+
+		// NVIC interrupt configuration
+		NVIC->ISER[0] |= (1 << 16); 		// Enable NVIC for the GPIO interrupt on Port A 											
+}
+
+
+void GPA_IRQHandler(void)
+{
+	if (PA->INTSRC & (1 << 0)) // Check if the interrupt is from PA.0 (SW1)
+    {
+		PA->INTSRC |= (1 << 0); // Clear the interrupt flag
+
+    }
+}
+
+void Joystick_Init(void)
+{
+    // Set PG.2(UP), PG.4(RIGHT) as input mode
+    PG->MODE &= ~((0x3 << 4) | (0x3 << 8)); // PG.2, PG.4
+		PG->PUSEL &= ~((0x3 << 4) |        /* clear PUSEL2  */
+									(0x3 << 8)); 
+		PG->PUSEL |=  ((0x1 << 4) |        /* set 01 = pull-up */
+									(0x1 << 8));
+
+    // Set PC.9(LEFT) and PC.10(DOWN) as input mode
+    PC->MODE &= ~((0x3 << 18) | (0x3 << 20)); // PC.9, PC.10
+		PC->PUSEL &= ~((0x3 << 18) |
+										(0x3 << 20));
+		PC->PUSEL |=  ((0x1 << 18) |
+										(0x1 << 20));
+}
+
+void Joystick_Polling_Read(void)
+{
+    if (!(PG->PIN & (1 << 2))) // UP
+        printf("Joystick UP pressed\n");
+				//PH->DOUT |= (1 << 6); // toggle LED2
+
+    if (!(PG->PIN & (1 << 4))) // RIGHT
+        printf("Joystick RIGHT pressed\n");
+				//PH->DOUT ^= (1 << 7); // toggle LED1
+
+    if (!(PC->PIN & (1 << 10))) // DOWN
+        printf("Joystick DOWN pressed\n");
+
+    if (!(PC->PIN & (1 << 9))) // LEFT
+        printf("Joystick LEFT pressed\n");
+}
+
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
@@ -300,6 +358,7 @@ int32_t main(void)
        protected register, please issue SYS_UnlockReg()
        to unlock protected register if necessary */
     SYS_Init();
+		Joystick_Init();
 	
 	  /* Init UART to 115200-8n1 for print message */
     //UART_Open(UART0, 115200);
@@ -363,6 +422,9 @@ int32_t main(void)
 				
         if(Timer1_flag == 1) {
             Timer1_flag = 0;
+					
+						Joystick_Polling_Read();	
+						
 					  /* Touch scanning */
             x = Get_TP_X();
             y = Get_TP_Y();
@@ -376,11 +438,10 @@ int32_t main(void)
 								else if (touch_count == 1){
 									gameLoop();
 								}
-						}						
+						}					
     }
   }
 
 }
 
-/*** (C) COPYRIGHT 2016 Nuvoton Technology Corp. ***/
 

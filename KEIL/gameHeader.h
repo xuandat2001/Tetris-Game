@@ -1,3 +1,5 @@
+#include <stdint.h> 
+
 /* Define Standard Colors (RGB565 format) */
 #define C_WHITE     0xFFFF
 #define C_BLACK     0x0000

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\obj\M480_LCD_with_Touch.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\obj\M480_LCD_with_Touch.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Thu May 22 18:29:00 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6220000: Last Updated: Fri May 23 00:04:01 2025
 <BR><P>
 <H3>Maximum Stack Usage =        140 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -75,7 +75,7 @@ Function Pointers
  <LI><a href="#[27]">EPWM1P0_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
  <LI><a href="#[28]">EPWM1P1_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
  <LI><a href="#[29]">EPWM1P2_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
- <LI><a href="#[1a]">GPA_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
+ <LI><a href="#[1a]">GPA_IRQHandler</a> from main.o(.text.GPA_IRQHandler) referenced from startup_m480.o(RESET)
  <LI><a href="#[1b]">GPB_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
  <LI><a href="#[1c]">GPC_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
  <LI><a href="#[1d]">GPD_IRQHandler</a> from startup_m480.o(.text) referenced from startup_m480.o(RESET)
@@ -348,9 +348,6 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_m480.o(RESET)
 </UL>
 <P><STRONG><a name="[29]"></a>EPWM1P2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_m480.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_m480.o(RESET)
-</UL>
-<P><STRONG><a name="[1a]"></a>GPA_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_m480.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_m480.o(RESET)
 </UL>
 <P><STRONG><a name="[1b]"></a>GPB_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_m480.o(.text))
@@ -680,6 +677,9 @@ Global Symbols
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_TP_X
 </UL>
 
+<P><STRONG><a name="[1a]"></a>GPA_IRQHandler</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, main.o(.text.GPA_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_m480.o(RESET)
+</UL>
 <P><STRONG><a name="[89]"></a>GPIO_SetMode</STRONG> (Thumb, 264 bytes, Stack size 16 bytes, gpio.o(.text.GPIO_SetMode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = GPIO_SetMode
 </UL>
@@ -843,7 +843,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[6a]"></a>main</STRONG> (Thumb, 708 bytes, Stack size 8 bytes, main.o(.text.main))
+<P><STRONG><a name="[6a]"></a>main</STRONG> (Thumb, 864 bytes, Stack size 8 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 140<LI>Call Chain = main &rArr; gameLoop &rArr; LCD_Draw_Border &rArr; LCD_PutString &rArr; LCD_PutChar8x16
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putchar

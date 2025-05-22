@@ -4,6 +4,7 @@
 #include "NuMicro.h"
 #include <math.h>
 
+#include "gameState.h"
 #include "gameHeader.h"
 #include "../EBI_LCD_Module.h"
 #include "gameLogic.h"
@@ -189,5 +190,33 @@ void gameLoop(){
         }
 
         CLK_SysTickDelay(20000); // Delay to control game speed (adjust as needed)
+    }
+}
+
+void UpdateGameState(void) {
+    switch (currentState) {
+        case STATE_WELCOME:
+            // Wait for SW1 to proceed to next state
+            break;
+
+        case STATE_WAIT_FOR_START:
+            // Wait for SW1 to start the game
+            break;
+
+        case STATE_PLAY:
+            // Handle block movement, drop timing, line clearing, etc.
+            break;
+
+        case STATE_PAUSE:
+            // Freeze timers and input
+            break;
+
+        case STATE_GAME_OVER:
+            // Wait for SW1 to go to high score or restart
+            break;
+
+        case STATE_HIGH_SCORE:
+            // Wait for SW1 to return to PLAY
+            break;
     }
 }

@@ -493,6 +493,16 @@
               <FileType>5</FileType>
               <FilePath>.\gameLogic.h</FilePath>
             </File>
+            <File>
+              <FileName>gameState.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\gameState.h</FilePath>
+            </File>
+            <File>
+              <FileName>gameState.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\gameState.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

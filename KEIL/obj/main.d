@@ -63,4 +63,5 @@
   Library\StdDriver\inc\rtc.h Library\StdDriver\inc\usci_uart.h \
   Library\StdDriver\inc\sdh.h Library\StdDriver\inc\usbd.h \
   Library\StdDriver\inc\hsusbd.h Library\StdDriver\inc\otg.h \
-  Library\StdDriver\inc\hsotg.h ..\EBI_LCD_Module.h ..\KEIL\gameHeader.h
+  Library\StdDriver\inc\hsotg.h ..\EBI_LCD_Module.h ..\KEIL\gameHeader.h \
+  ..\KEIL\gameState.h

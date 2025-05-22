@@ -10,6 +10,7 @@
 ".\obj\welcomescreen.o"
 ".\obj\backgroundscreenplay.o"
 ".\obj\gamelogic.o"
+".\obj\gamestate.o"
 ".\obj\clk.o"
 ".\obj\retarget.o"
 ".\obj\sys.o"

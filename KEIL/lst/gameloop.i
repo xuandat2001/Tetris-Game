@@ -6372,8 +6372,26 @@ extern __attribute__((__nothrow__)) __attribute__((__const__)) float truncf(floa
 __attribute__((__nothrow__)) long double truncl(long double );
 # 6 "gameLoop.c" 2
 
+# 1 ".\\gameState.h" 1
+
+
+
+typedef enum uint8_t {
+    STATE_WELCOME,
+    STATE_WAIT_FOR_START,
+    STATE_PLAY,
+    STATE_PAUSE,
+    STATE_GAME_OVER,
+    STATE_HIGH_SCORE
+} GameState;
+
+extern GameState currentState;
+
+void SetState(GameState newState);
+void UpdateGameState(void);
+# 8 "gameLoop.c" 2
 # 1 ".\\gameHeader.h" 1
-# 23 ".\\gameHeader.h"
+# 25 ".\\gameHeader.h"
 // Define colors (RGB565)
 
 
@@ -6399,7 +6417,7 @@ void Draw_J_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
-# 8 "gameLoop.c" 2
+# 9 "gameLoop.c" 2
 # 1 ".\\../EBI_LCD_Module.h" 1
 # 28 ".\\../EBI_LCD_Module.h"
 // Characters
@@ -6421,7 +6439,7 @@ uint16_t Get_TP_X(void);
 uint16_t Get_TP_Y(void);
 
 // Custom
-# 9 "gameLoop.c" 2
+# 10 "gameLoop.c" 2
 # 1 ".\\gameLogic.h" 1
 
 typedef enum { false, true } bool;
@@ -6467,7 +6485,7 @@ extern const char* shapeNames[7];
 void Prepare_Next_Shape(void);
 void Draw_Current_Shape(int x, int y, uint16_t borderColor);
 void Test_Draw_All_Shapes(void);
-# 10 "gameLoop.c" 2
+# 11 "gameLoop.c" 2
 bool isPaused = false;
 
 int nextShapeIndex = -1;
@@ -6650,5 +6668,33 @@ void gameLoop(){
         }
 
         CLK_SysTickDelay(20000); // Delay to control game speed (adjust as needed)
+    }
+}
+
+void UpdateGameState(void) {
+    switch (currentState) {
+        case STATE_WELCOME:
+            // Wait for SW1 to proceed to next state
+            break;
+
+        case STATE_WAIT_FOR_START:
+            // Wait for SW1 to start the game
+            break;
+
+        case STATE_PLAY:
+            // Handle block movement, drop timing, line clearing, etc.
+            break;
+
+        case STATE_PAUSE:
+            // Freeze timers and input
+            break;
+
+        case STATE_GAME_OVER:
+            // Wait for SW1 to go to high score or restart
+            break;
+
+        case STATE_HIGH_SCORE:
+            // Wait for SW1 to return to PLAY
+            break;
     }
 }
