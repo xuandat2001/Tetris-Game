@@ -8,7 +8,9 @@
 #include "gameHeader.h"
 #include "../EBI_LCD_Module.h"
 #include "gameLogic.h"
-bool isPaused = false;
+
+extern  volatile    uint8_t Timer1_flag;
+extern  volatile    uint8_t Timer1_cnt;
 
 int nextShapeIndex = -1;
 // Draw a Picture
@@ -149,6 +151,7 @@ void Draw_Sidebar_UI(void) {
     lineY = 280;
     LCD_PutString(sidebarX1, lineY, (uint8_t *)"PAUSE(SW1)", COLOR_WHITE, 0x2104);
 }
+
 void LCD_Draw_Border(){
 	LCD_Picture(0, 0, 240, 320, backgroundScreenPlay);
 	LCD_Draw_SquareBorder(0, 0, 32, 24,  0x7BEF, 0x0000);  // light gray border
@@ -176,7 +179,7 @@ void Check_Input() {
 
     lastButtonState = currentButtonState;
 }
-void gameLoop(){
+/*void gameLoop(){
 	    LCD_Draw_Border();
 
     while (1) {
@@ -191,32 +194,77 @@ void gameLoop(){
 
         CLK_SysTickDelay(20000); // Delay to control game speed (adjust as needed)
     }
+}*/
+
+
+
+/* Timer display */
+void LCD_DrawTime(uint16_t x, uint16_t y, uint32_t seconds)
+{
+    uint8_t mm = (seconds / 60) % 100;   /* wrap at 99 min          */
+    uint8_t ss =  seconds % 60;
+
+    /* build ASCII string “MM:SS” */
+    char buf[6];
+    sprintf(buf, "%02u:%02u", mm, ss);
+
+    /* overwrite previous text (fast) – 5 chars × 8 px wide = 40 px */
+    LCD_BlankArea(x, y, 40, 16, C_BLACK);          /* erase old      */
+    LCD_PutString(x, y, (uint8_t*)buf, C_WHITE, C_BLACK);
 }
 
-void UpdateGameState(void) {
-    switch (currentState) {
-        case STATE_WELCOME:
-            // Wait for SW1 to proceed to next state
-            break;
+void gameLoop() {
+    // Handle block dropping via Timer1
+    if (Timer1_flag) {
+        Timer1_flag = 0;
+        if (!Check_Collision(currentX, currentY + 1, &currentShape)) {
+            currentY++;
+        } else {
+            Merge_Shape_Into_Grid();
+            int lines = Clear_Lines();
+            if (lines > 0) {
+                score += lines;
+                Update_Level_Speed();
+            }
+            Spawn_New_Shape();
+        }
+    }
 
-        case STATE_WAIT_FOR_START:
-            // Wait for SW1 to start the game
-            break;
+    // Handle joystick input
+    if (!(PG->PIN & (1 << 2))) { // UP: Rotate
+        Tetromino rotated = currentShape;
+        Rotate_Clockwise(&rotated);
+        if (!Check_Collision(currentX, currentY, &rotated)) {
+            currentShape = rotated;
+        }
+    }
+    if (!(PC->PIN & (1 << 9))) { // LEFT
+        if (!Check_Collision(currentX - 1, currentY, &currentShape)) currentX--;
+    }
+    if (!(PG->PIN & (1 << 4))) { // RIGHT
+        if (!Check_Collision(currentX + 1, currentY, &currentShape)) currentX++;
+    }
+    if (!(PC->PIN & (1 << 10))) { // DOWN: Hard drop
+        while (!Check_Collision(currentX, currentY + 1, &currentShape)) currentY++;
+        Merge_Shape_Into_Grid();
+        Spawn_New_Shape();
+    }
 
-        case STATE_PLAY:
-            // Handle block movement, drop timing, line clearing, etc.
-            break;
+    // Redraw
+    LCD_Draw_Border();
+    Draw_Grid();
+    Draw_Current_Shape(currentX * SQUARE_SIZE, currentY * SQUARE_SIZE, COLOR_BORDER);
+}
 
-        case STATE_PAUSE:
-            // Freeze timers and input
-            break;
-
-        case STATE_GAME_OVER:
-            // Wait for SW1 to go to high score or restart
-            break;
-
-        case STATE_HIGH_SCORE:
-            // Wait for SW1 to return to PLAY
-            break;
+// Draw the entire grid
+void Draw_Grid() {
+    for (y = 0; y < GRID_HEIGHT; y++) {
+        for (x = 0; x < GRID_WIDTH; x++) {
+            if (gameGrid[y][x]) {
+                LCD_Draw_FilledSquare(x * SQUARE_SIZE, y * SQUARE_SIZE, gameGrid[y][x], COLOR_BORDER);
+            }
+        }
     }
 }
+
+

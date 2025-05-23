@@ -6634,9 +6634,8 @@ void LCD_PutString(uint16_t x, uint16_t y, uint8_t *s, uint32_t fColor, uint32_t
             l++;
         }
     }
-
 }
-# 370 "../EBI_LCD_Module.c"
+# 369 "../EBI_LCD_Module.c"
 void LCD_PutChar16x32(uint16_t x, uint16_t y, uint16_t c, uint32_t fColor, uint32_t bColor)
 {
     uint32_t i, j;
@@ -6656,7 +6655,7 @@ void LCD_PutChar16x32(uint16_t x, uint16_t y, uint16_t c, uint32_t fColor, uint3
     }
 
 }
-# 402 "../EBI_LCD_Module.c"
+# 401 "../EBI_LCD_Module.c"
 void LCD_BlankArea(uint16_t X, uint16_t Y, uint16_t W, uint16_t H, uint16_t color)
 {
     uint16_t i, j;
@@ -6668,7 +6667,7 @@ void LCD_BlankArea(uint16_t X, uint16_t Y, uint16_t W, uint16_t H, uint16_t colo
     }
 
 }
-# 423 "../EBI_LCD_Module.c"
+# 422 "../EBI_LCD_Module.c"
 uint16_t Get_TP_X(void)
 {
     uint16_t x_adc_in;
@@ -6716,7 +6715,7 @@ uint16_t Get_TP_X(void)
     return X_pos;
 
 }
-# 480 "../EBI_LCD_Module.c"
+# 479 "../EBI_LCD_Module.c"
 uint16_t Get_TP_Y(void)
 {
     uint16_t y_adc_in;
@@ -6764,7 +6763,7 @@ uint16_t Get_TP_Y(void)
     return Y_pos;
 
 }
-# 537 "../EBI_LCD_Module.c"
+# 536 "../EBI_LCD_Module.c"
 void EADC01_IRQHandler(void)
 {
 

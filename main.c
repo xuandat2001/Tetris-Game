@@ -10,11 +10,21 @@
 #include "EBI_LCD_Module.h"
 #include "KEIL/gameHeader.h"
 #include "KEIL/gameState.h"
+#include "KEIL/gameLogic.h"
 #define RECT_WTDTH 50
 #define RECT_HIGH 100
 #define HXTSTB 1 << 0     // HXT Clock Sourse Stable Flag
 #define PLLSTB 1<<2				// Internal PLL Clock Source Stable Flag
 #define HXTEN  1<<0				// HXT Enable Bit, write 1 to enable 
+
+// Add global variables (if not already declared)
+#define GRID_WIDTH 14
+#define GRID_HEIGHT 24
+extern bool isPaused;
+extern GameState currentState;
+extern int score;
+extern int level;
+extern uint8_t gameGrid[GRID_HEIGHT][GRID_WIDTH];
 
 /*---------------------------------------------------------------------------*/
 /* Define                                                                    */
@@ -33,6 +43,12 @@ extern  volatile    uint8_t Timer3_cnt;
 /*---------------------------------------------------------------------------*/
 volatile    uint8_t     Timer1_flag = 0;
 volatile    uint8_t     Timer1_cnt = 0;
+volatile    uint8_t     Timer0_flag = 0;
+volatile    uint8_t     Timer0_cnt = 0;
+volatile uint8_t timer_running = 1; // 1 = running, 0 = paused
+uint8_t seconds = 0;
+uint8_t minutes = 0;
+
 
 void SYS_Init(void)
 {
@@ -98,6 +114,11 @@ void SYS_Init(void)
 		CLK->CLKSEL1 &= ~ (0b111 << 12); // clear setting
 		CLK->CLKSEL1 |= (0b000 << 12); 	// Clock source from HXT
 		CLK->APBCLK0 |= (1 << 3); 		// Clock enable for Timer 1
+		
+		// TM0 clock selection 
+		CLK->CLKSEL1 &= ~ (0b111 << 8); // clear setting
+		CLK->CLKSEL1 |= (0b000 << 8); 	// Clock source from HXT
+		CLK->APBCLK0 |= (1 << 2); 		// Clock enable for Timer 0
 
 		// EBI Controller Clock Enable Bit
 		CLK->AHBCLK |= (1 << 3);  
@@ -158,7 +179,7 @@ void SYS_Init(void)
     SYS->GPD_MFPL &= ~((0xF << 8) | (0xF << 12));
     SYS->GPD_MFPL |= ((0x09 << 8) | (0x09 << 12));
 
-		SYS_LockReg(); // Lock the register
+		//SYS_LockReg(); // Lock the register
 }
 
 void TMR1_IRQHandler(void)
@@ -179,10 +200,10 @@ void Timer1_Init(void)
 {
 		// Set Prescale
 		TIMER1->CTL &= ~(0xFF << 0); // clear current setting for Prescale
-		TIMER1->CTL |= (0 << 0); // Prescale = (0+1) = 1
+		TIMER1->CTL |= (11 << 0); // Prescale = (11+1) = 12
 	
-    /*( 1/12MHz * 1200000) - 1 = 100ms */
-    TIMER1->CMP = 1199999;
+    // Duration = 0.5s => Target Tiner Count = 499999
+    TIMER1->CMP = 499999;
 	
 		// Set TM1 operation mode to Periodic Mode
 		TIMER1->CTL &= ~(0b11 << 27); // Clear current settings
@@ -208,6 +229,63 @@ void Timer1_Init(void)
 
     /* Reset Timer1_cnt */
     Timer1_cnt = 0;
+}
+
+void TMR0_IRQHandler(void)
+{
+		if (TIMER0->INTSTS & (1 << 0))
+		{
+			TIMER0->INTSTS = (1 << 0); // Clear Timer 0 overflow flag	
+			
+        // Only update time if game is running and not paused
+        //if (currentState == STATE_PLAY && !isPaused) {
+            Timer0_flag = 1; // Notify main loop to update time
+						
+        //}
+		}
+}
+
+void Timer0_Init(void)
+{
+		// Set Prescale
+		TIMER0->CTL &= ~(0xFF << 0); // clear current setting for Prescale
+		TIMER0->CTL |= (11 << 0); // Prescale = (11+1) = 12
+	
+    // Duration = 1s => Target Tiner Count = 499999
+    TIMER0->CMP = 999999;
+	
+		// Set TM0 operation mode to Periodic Mode
+		TIMER0->CTL &= ~(0b11 << 27); // Clear current settings
+		TIMER0->CTL |= (0b01 << 27);	// Periodic Mode
+		// The behavior selection in periodic mode is Enabled.
+		TIMER0->CTL |= (1 << 20);
+		// Enable TM0 interrup flag TIF
+		TIMER0->CTL |= (1 << 29);
+
+		// Configure Interrupt
+		// Enable TM0 interrup flag TIF
+		TIMER0->CTL |= (1 << 29);
+		// NVIC interrupt configuration
+		NVIC->ISER[1] |= (1 << 0); // (32 - 32 = 0)
+		// Clear Timer 0 overflow flag
+		TIMER0->INTSTS = (1 << 0); // Write 1 to clear TIF
+		
+		// TM0 Start Counting
+		TIMER0->CTL |= (1 << 30);
+
+    /* Clear Timer0_flag */
+    Timer0_flag = 0;
+
+    /* Reset Timer0_cnt */
+    Timer0_cnt = 0;
+}
+
+void Timer0_Start(void) {
+    TIMER0->CTL |= (1 << 30); // Enable Timer0 counting
+}
+
+void Timer0_Stop(void) {
+    TIMER0->CTL &= ~(1 << 30); // Disable Timer0 counting
 }
 
 void UART0_Config(void)
@@ -285,7 +363,8 @@ void SW1_Interrupt_Setup(void)
 {
 		//Configure PA.0 (SW1) as input mode
 		PA->MODE &= ~(0x3 << 0); 		// Clear bits [1:0] for PA.0
-
+		PA->PUSEL |= (1 << 0);      // Enable pull-up resistor
+	
 		PA->INTTYPE &= ~(1 << 0); 		// Edge trigger interrupt for PA.0
 		PA->INTEN |= (1 << 0); 		// Falling edge interrupt enable
 		PA->INTSRC |= (1 << 0);		// Clear any pending interrupt flag for PA.0
@@ -295,49 +374,140 @@ void SW1_Interrupt_Setup(void)
 }
 
 
-void GPA_IRQHandler(void)
-{
-	if (PA->INTSRC & (1 << 0)) // Check if the interrupt is from PA.0 (SW1)
-    {
-		PA->INTSRC |= (1 << 0); // Clear the interrupt flag
+void SW1_IRQHandler(void) {
+    if (PA->INTSRC & (1 << 0)) {
+        PA->INTSRC |= (1 << 0); // Clear interrupt flag
 
+        /*switch (currentState) {
+            case STATE_WELCOME:
+                SetState(STATE_WAIT_FOR_START);
+                break;
+            case STATE_WAIT_FOR_START:
+                SetState(STATE_PLAY);
+                Spawn_New_Shape(); // Initialize first block
+                break;
+            case STATE_PLAY:
+                isPaused = !isPaused;
+                if (isPaused) {
+                    Timer0_Stop();
+                    SetState(STATE_PAUSE);
+                } else {
+                    Timer0_Start();
+                }
+                break;
+            case STATE_GAME_OVER:
+                SetState(STATE_HIGH_SCORE);
+                break;
+            case STATE_HIGH_SCORE:
+                SetState(STATE_WAIT_FOR_START);
+                break;
+						default:
+							break;
+        }*/
+			LCD_PutString(0, 172, (uint8_t *)"t la huy",  C_YELLOW, C_BLACK);
     }
 }
 
+// Joystick Interrupt
+
 void Joystick_Init(void)
 {
-    // Set PG.2(UP), PG.4(RIGHT) as input mode
-    PG->MODE &= ~((0x3 << 4) | (0x3 << 8)); // PG.2, PG.4
-		PG->PUSEL &= ~((0x3 << 4) |        /* clear PUSEL2  */
-									(0x3 << 8)); 
-		PG->PUSEL |=  ((0x1 << 4) |        /* set 01 = pull-up */
-									(0x1 << 8));
+		//Configure PG.2 (UP) as input mode
+		PG->MODE &= ~(0x3 << 4); 		// Clear bits [5:4] for PG.2
 
-    // Set PC.9(LEFT) and PC.10(DOWN) as input mode
-    PC->MODE &= ~((0x3 << 18) | (0x3 << 20)); // PC.9, PC.10
-		PC->PUSEL &= ~((0x3 << 18) |
-										(0x3 << 20));
-		PC->PUSEL |=  ((0x1 << 18) |
-										(0x1 << 20));
+		PG->INTTYPE &= ~(1 << 2); 		// Edge trigger interrupt for PG.2
+		PG->INTEN |= (1 << 2); 		// Falling edge interrupt enable
+		PG->INTSRC |= (1 << 2);		// Clear any pending interrupt flag for PG.2
+	
+		//Configure PG.4 (RIGHT) as input mode
+		PG->MODE &= ~(0x3 << 8); 		// Clear bits [9:8] for PG.4
+
+		PG->INTTYPE &= ~(1 << 4); 		// Edge trigger interrupt for PG.4
+		PG->INTEN |= (1 << 4); 		// Falling edge interrupt enable
+		PG->INTSRC |= (1 << 4);		// Clear any pending interrupt flag for PG.4
+	
+		//Configure PC.9 (LEFT) as input mode
+		PC->MODE &= ~(0x3 << 18); 		// Clear bits [19:18] for PC.9
+
+		PC->INTTYPE &= ~(1 << 9); 		// Edge trigger interrupt for PC.9
+		PC->INTEN |= (1 << 9); 		// Falling edge interrupt enable
+		PC->INTSRC |= (1 << 9);		// Clear any pending interrupt flag for PC.9
+	
+		//Configure PC.10 (DOWN) as input mode
+		PC->MODE &= ~(0x3 << 20); 		// Clear bits [21:20] for PC.10
+
+		PC->INTTYPE &= ~(1 << 10); 		// Edge trigger interrupt for PC.10
+		PC->INTEN |= (1 << 10); 		// Falling edge interrupt enable
+		PC->INTSRC |= (1 << 10);		// Clear any pending interrupt flag for PC.10
+		
+		// NVIC interrupt configuration\
+		// GPG_INT
+		NVIC->ISER[2] |= (1 << (72 - 64)); 		// Enable NVIC for the GPIO interrupt on Port G - 
+												// GPG_INT is bit 72 --> belong to ISER2 (64 to 95)
+		// GPC_INT									
+		NVIC->ISER[0] |= (1 << 18); 		
+												
+}
+void GPG_IRQHandler(void) { // PG.2 (UP) and PG.4 (RIGHT)
+    if (PG->INTSRC & (1 << 2)) { // UP: Rotate block
+        Rotate_Current_Block();
+        PG->INTSRC |= (1 << 2);
+    }
+    if (PG->INTSRC & (1 << 4)) { // RIGHT: Move right
+        Move_Block_Right();
+        PG->INTSRC |= (1 << 4);
+    }
 }
 
-void Joystick_Polling_Read(void)
-{
-    if (!(PG->PIN & (1 << 2))) // UP
-        printf("Joystick UP pressed\n");
-				//PH->DOUT |= (1 << 6); // toggle LED2
-
-    if (!(PG->PIN & (1 << 4))) // RIGHT
-        printf("Joystick RIGHT pressed\n");
-				//PH->DOUT ^= (1 << 7); // toggle LED1
-
-    if (!(PC->PIN & (1 << 10))) // DOWN
-        printf("Joystick DOWN pressed\n");
-
-    if (!(PC->PIN & (1 << 9))) // LEFT
-        printf("Joystick LEFT pressed\n");
+void GPC_IRQHandler(void) { // PC.9 (LEFT), PC.10 (DOWN)
+    if (PC->INTSRC & (1 << 9)) { // LEFT: Move left
+        Move_Block_Left();
+        PC->INTSRC |= (1 << 9);
+    }
+    if (PC->INTSRC & (1 << 10)) { // DOWN: Drop faster
+        Drop_Block_Fast();
+        PC->INTSRC |= (1 << 10);
+    }
+}
+void GPIO_PG_IRQHandler(void) {
+    if (PG->INTSRC & (1 << 2)) { // UP: Rotate
+        PG->INTSRC = (1 << 2);
+        if (currentState == STATE_PLAY && !isPaused) {
+            Tetromino rotated = currentShape;
+            Rotate_Clockwise(&rotated);
+            if (!Check_Collision(currentX, currentY, &rotated)) {
+                currentShape = rotated;
+            }
+        }
+    }
+    if (PG->INTSRC & (1 << 4)) { // RIGHT
+        PG->INTSRC = (1 << 4);
+        if (currentState == STATE_PLAY && !isPaused && !Check_Collision(currentX + 1, currentY, &currentShape)) {
+            currentX++;
+        }
+    }
 }
 
+void GPIO_PC_IRQHandler(void) {
+    if (PC->INTSRC & (1 << 9)) { // LEFT
+        PC->INTSRC = (1 << 9);
+        if (currentState == STATE_PLAY && !isPaused && !Check_Collision(currentX - 1, currentY, &currentShape)) {
+            currentX--;
+        }
+    }
+    if (PC->INTSRC & (1 << 10)) { // DOWN: Hard drop
+        PC->INTSRC = (1 << 10);
+        if (currentState == STATE_PLAY && !isPaused) {
+            while (!Check_Collision(currentX, currentY + 1, &currentShape)) {
+                currentY++;
+            }
+            Merge_Shape_Into_Grid();
+            int lines = Clear_Lines();
+            if (lines > 0) score += lines;
+            Spawn_New_Shape();
+        }
+    }
+}
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
@@ -357,26 +527,15 @@ int32_t main(void)
        to lock protected register. If user want to write
        protected register, please issue SYS_UnlockReg()
        to unlock protected register if necessary */
+	    /* Unlock protected registers */
+    SYS_UnlockReg();
     SYS_Init();
 		Joystick_Init();
 	
 	  /* Init UART to 115200-8n1 for print message */
-    //UART_Open(UART0, 115200);
 		UART0_Config();
 	
-	  printf("\n");
-    printf("+---------------------------------------------------------+\n");
-    printf("|            M487 LCD Display with Touch Function         |\n");
-    printf("+---------------------------------------------------------+\n");
-    printf("HXT clock %d Hz\n", CLK_GetHXTFreq());
-    printf("CPU clock %d Hz\n", CLK_GetCPUFreq());
-	
-		/* Initialize EBI bank0 to access external LCD Module */
-    //EBI_Open(EBI_BANK0, EBI_BUSWIDTH_16BIT, EBI_TIMING_NORMAL, 0, EBI_CS_ACTIVE_LOW);
-    //EBI->CTL0 |= EBI_CTL0_CACCESS_Msk;
-    //EBI->TCTL0 |= (EBI_TCTL0_WAHDOFF_Msk | EBI_TCTL0_RAHDOFF_Msk);
 		EBI_Config();
-    printf("\n[EBI CTL0:0x%08X, TCLT0:0x%08X]\n\n", EBI->CTL0, EBI->TCTL0);
 
     /* Init LCD Module */
     ILI9341_Initial();
@@ -386,22 +545,25 @@ int32_t main(void)
 		PB->DOUT |= (1 << 7);
 
     /* Set PH7/PH6 as output mode for LED1/LED2 */
-    //GPIO_SetMode(PH, BIT7|BIT6, GPIO_MODE_OUTPUT);
-    //PH7 = 1;
-    //PH6 = 1;
 		GPIO_Config();
 
     /* Init ADC for TP */
     /* Set input mode as single-end and enable the A/D converter */
-    // EADC_Open(EADC, EADC_CTL_DIFFEN_SINGLE_END);
-		//EADC->CTL &= ~(1 << 0); // set the Single-end input mode
-		//EADC_Open(EADC, EADC_CTL_DIFFEN_SINGLE_END);
 		EADC_Config();
     /* Init Timer3 */
     //Timer3_Init();
 		
-		    /* Init Timer1 */
+		/* Init Timer1 */
     Timer1_Init();
+		
+		/* Init Timer1 */
+    Timer0_Init();
+		SW1_Interrupt_Setup();
+		
+		/* Lock protected registers */
+    SYS_LockReg();
+		// Initialize game state
+    SetState(STATE_WELCOME); 
     /*=== Show the 1st display ===*/
     /* Blank screen */
     LCD_BlankArea(0, 0, LCD_W, LCD_H, C_BLACK);
@@ -411,36 +573,47 @@ int32_t main(void)
 		LCD_PutString(0, 160, (uint8_t *)"Design and Implementation",  C_YELLOW, C_BLACK);
 		
     /* waiting 3s */
-    Timer1_cnt = 0;
-    while(Timer1_cnt < 30) {};
+    //Timer3_cnt = 0;
+    //while(Timer3_cnt < 30) {};
 
     /*=== Show the 2nd display ===*/
     /* Blank screen */
     LCD_BlankArea(0, 0, LCD_W, LCD_H, C_BLACK);
-		LCD_PutString(0, 144, (uint8_t *)"Please touch the screen of LCD",  C_YELLOW, C_BLACK);
-    while(1) {
-				
-        if(Timer1_flag == 1) {
-            Timer1_flag = 0;
-					
-						Joystick_Polling_Read();	
-						
-					  /* Touch scanning */
-            x = Get_TP_X();
-            y = Get_TP_Y();
-					
-						if ((x != LCD_W - 1) && (y != LCD_H - 1)) {
-								if (touch_count == 0 && !rect_drawn) {
-										LCD_Picture(0, 0, 240, 320, WelcomeScreen);
-										rect_drawn = 1;
-										touch_count++;
-								}
-								else if (touch_count == 1){
-									gameLoop();
-								}
-						}					
+		LCD_PutString(0, 172, (uint8_t *)"Please touch the screen of LCD",  C_YELLOW, C_BLACK);
+
+   while(1) {
+
+    // Handle Timer0 for time updates
+    if (Timer0_flag == 1) {
+        Timer0_flag = 0;
+				LCD_PutString(0, 172, (uint8_t *)"hehehe",  C_YELLOW, C_BLACK);
+        //if (currentState == STATE_PLAY && !isPaused) {
+            seconds++;
+            if (seconds >= 60) { 
+                seconds = 0;
+                minutes++; 
+            }
+            LCD_DisplayTime(minutes, seconds);
+        //}
     }
-  }
+
+    // Handle game state transitions
+    switch (currentState) {
+        case STATE_WELCOME:
+            // Wait for SW1 press (handled by interrupt)
+            break;
+        case STATE_PLAY:
+            gameLoop(); // Run the game
+            break;
+        case STATE_PAUSE:
+        case STATE_GAME_OVER:
+        case STATE_HIGH_SCORE:
+            // States handled by interrupts
+            break;
+				default:
+					break;
+    }
+}
 
 }
 

@@ -64,4 +64,4 @@
   Library\StdDriver\inc\rtc.h Library\StdDriver\inc\usci_uart.h \
   Library\StdDriver\inc\sdh.h Library\StdDriver\inc\usbd.h \
   Library\StdDriver\inc\hsusbd.h Library\StdDriver\inc\otg.h \
-  Library\StdDriver\inc\hsotg.h gameState.h
+  Library\StdDriver\inc\hsotg.h gameState.h ..\EBI_LCD_Module.h

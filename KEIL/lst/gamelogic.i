@@ -6373,10 +6373,18 @@ __attribute__((__nothrow__)) long double truncl(long double );
 # 6 "gameLogic.c" 2
 # 1 ".\\gameLogic.h" 1
 
-typedef enum { false, true } bool;
 
-extern bool isPaused;
+
+//typedef enum { false, true } bool;
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdbool.h" 1 3
+# 6 ".\\gameLogic.h" 2
+
+
+
+
+extern _Bool isPaused;
 extern int nextShapeIndex; // Holds next shape to appear
+extern int x, y; // Declare as extern to share across files
 
 // === Block and Tetromino ===
 typedef struct {
@@ -6387,6 +6395,9 @@ typedef struct {
     Block blocks[4]; // A tetromino has 4 blocks
     uint16_t color; // 16-bit RGB565 color
 } Tetromino;
+
+extern Tetromino currentShape;
+extern int currentX, currentY;
 
 // === All 7 Tetromino Shapes ===
 extern Tetromino shapes[7];
@@ -6416,6 +6427,27 @@ extern const char* shapeNames[7];
 void Prepare_Next_Shape(void);
 void Draw_Current_Shape(int x, int y, uint16_t borderColor);
 void Test_Draw_All_Shapes(void);
+void Reset_Game(); // Declare reset function
+
+extern uint8_t gameGrid[24][14];
+extern Tetromino currentShape;
+extern int currentX, currentY;
+extern int currentRotation;
+extern int score;
+extern int level;
+
+void Rotate_Clockwise(Tetromino* shape);
+_Bool Check_Collision(int newX, int newY, Tetromino *shape);
+void Merge_Shape_Into_Grid();
+int Clear_Lines();
+void Update_Level_Speed();
+void Spawn_New_Shape();
+void Draw_Grid(void);
+
+void Rotate_Current_Block(void);
+void Move_Block_Left(void);
+void Move_Block_Right(void);
+void Drop_Block_Fast(void);
 # 7 "gameLogic.c" 2
 # 1 ".\\gameHeader.h" 1
 # 25 ".\\gameHeader.h"
@@ -6444,7 +6476,27 @@ void Draw_J_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
+void LCD_DisplayTime(uint8_t min, uint8_t sec);
 # 8 "gameLogic.c" 2
+# 1 ".\\gameState.h" 1
+# 15 ".\\gameState.h"
+typedef enum {
+    STATE_WELCOME,
+    STATE_WAIT_FOR_START,
+    STATE_PLAY,
+    STATE_PAUSE,
+    STATE_GAME_OVER,
+    STATE_HIGH_SCORE
+} GameState;
+
+extern GameState currentState; // Declare global state variable
+extern _Bool isPaused; // Declare pause flag
+
+//extern GameState currentState;
+
+void SetState(GameState newState);
+void UpdateGameState(void);
+# 9 "gameLogic.c" 2
 # 1 ".\\../EBI_LCD_Module.h" 1
 # 28 ".\\../EBI_LCD_Module.h"
 // Characters
@@ -6466,7 +6518,8 @@ uint16_t Get_TP_X(void);
 uint16_t Get_TP_Y(void);
 
 // Custom
-# 9 "gameLogic.c" 2
+# 10 "gameLogic.c" 2
+int x, y;
 // Shape Rotation
 // All shapes in default orientation (rotation 0)
 Tetromino shapes[7] = {
@@ -6544,4 +6597,123 @@ void Test_Draw_All_Shapes(void) {
     Draw_S_Shape(10, 80, borderColor); // Green
     Draw_T_Shape(70, 80, borderColor); // Purple
     Draw_Z_Shape(130, 80, borderColor); // Red
+}
+
+void LCD_DisplayTime(uint8_t min, uint8_t sec)
+{
+    char buffer[6];
+    sprintf(buffer, "%02d:%02d", min, sec);
+
+    // Draw updated time at a clearly visible place
+    LCD_PutString(0, 200, (uint8_t *)"        ", 0x0000, 0x0000); // Clear area
+    LCD_PutString(0, 200, (uint8_t *)buffer, 0xFFE0, 0x0000); // Show time
+}
+
+
+
+uint8_t gameGrid[24][14] = {0};
+Tetromino currentShape;
+int currentX, currentY, currentRotation;
+int score = 0;
+int level = 1;
+int i;
+int x;
+int y;
+int ny;
+// Collision detection
+_Bool Check_Collision(int newX, int newY, Tetromino *shape) {
+    for (i = 0; i < 4; i++) {
+        int gridX = newX + shape->blocks[i].x;
+        int gridY = newY + shape->blocks[i].y;
+        if (gridX < 0 || gridX >= 14 || gridY >= 24) return 1;
+        if (gridY >= 0 && gameGrid[gridY][gridX]) return 1;
+    }
+    return 0;
+}
+
+// Merge current shape into grid
+void Merge_Shape_Into_Grid() {
+    for (i = 0; i < 4; i++) {
+        int x = currentX + currentShape.blocks[i].x;
+        int y = currentY + currentShape.blocks[i].y;
+        if (y >= 0) gameGrid[y][x] = currentShape.color;
+    }
+}
+
+// Clear filled lines and return count
+int Clear_Lines() {
+    int linesCleared = 0;
+    for (y = 24 - 1; y >= 0; y--) {
+        int filled = 1;
+        for (x = 0; x < 14; x++) {
+            if (!gameGrid[y][x]) {
+                filled = 0;
+                break;
+            }
+        }
+        if (filled) {
+            // Shift all rows above down
+            for (ny = y; ny > 0; ny--) {
+                memcpy(gameGrid[ny], gameGrid[ny - 1], 14);
+            }
+            memset(gameGrid[0], 0, 14);
+            linesCleared++;
+            y++; // Recheck the same row
+        }
+    }
+    return linesCleared;
+}
+
+// Update level and timer speed
+void Update_Level_Speed() {
+    level = (score / 5) + 1;
+    if (level > 10) level = 10;
+    // Adjust Timer1 interval: 0.5s at L1, 0.05s at L10
+    uint32_t cmp = 500000 - (level - 1) * 45000;
+    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CMP = cmp;
+}
+
+// Spawn new shape
+void Spawn_New_Shape() {
+    currentShape = shapes[nextShapeIndex];
+    currentX = 14 / 2 - 2;
+    currentY = -2; // Start above grid
+    currentRotation = 0;
+    if (Check_Collision(currentX, currentY, &currentShape)) {
+        SetState(STATE_GAME_OVER); // Game over if collision on spawn
+    }
+}
+
+// gameLogic.c
+void Rotate_Current_Block() {
+    Tetromino rotated = currentShape;
+    Rotate_Clockwise(&rotated);
+    if (!Check_Collision(currentX, currentY, &rotated)) {
+        currentShape = rotated;
+    }
+}
+
+void Move_Block_Left() {
+    if (!Check_Collision(currentX - 1, currentY, &currentShape)) {
+        currentX--;
+    }
+}
+
+void Move_Block_Right() {
+    if (!Check_Collision(currentX + 1, currentY, &currentShape)) {
+        currentX++;
+    }
+}
+
+void Drop_Block_Fast() {
+    while (!Check_Collision(currentX, currentY + 1, &currentShape)) {
+        currentY++;
+    }
+    Merge_Shape_Into_Grid();
+    int lines = Clear_Lines();
+    if (lines > 0) {
+        score += lines;
+        Update_Level_Speed();
+    }
+    Spawn_New_Shape();
 }

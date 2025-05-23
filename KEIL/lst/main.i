@@ -5870,12 +5870,14 @@ void Draw_J_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
+void LCD_DisplayTime(uint8_t min, uint8_t sec);
 # 12 "../main.c" 2
 # 1 "..\\KEIL/gameState.h" 1
 
-
-
-typedef enum uint8_t {
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdbool.h" 1 3
+# 3 "..\\KEIL/gameState.h" 2
+# 15 "..\\KEIL/gameState.h"
+typedef enum {
     STATE_WELCOME,
     STATE_WAIT_FOR_START,
     STATE_PLAY,
@@ -5884,12 +5886,106 @@ typedef enum uint8_t {
     STATE_HIGH_SCORE
 } GameState;
 
-extern GameState currentState;
+extern GameState currentState; // Declare global state variable
+extern _Bool isPaused; // Declare pause flag
+
+//extern GameState currentState;
 
 void SetState(GameState newState);
 void UpdateGameState(void);
 # 13 "../main.c" 2
-# 26 "../main.c"
+# 1 "..\\KEIL/gameLogic.h" 1
+
+
+
+//typedef enum { 0, 1 } _Bool;
+
+
+
+
+
+extern _Bool isPaused;
+extern int nextShapeIndex; // Holds next shape to appear
+extern int x, y; // Declare as extern to share across files
+
+// === Block and Tetromino ===
+typedef struct {
+    int x, y;
+} Block;
+
+typedef struct {
+    Block blocks[4]; // A tetromino has 4 blocks
+    uint16_t color; // 16-bit RGB565 color
+} Tetromino;
+
+extern Tetromino currentShape;
+extern int currentX, currentY;
+
+// === All 7 Tetromino Shapes ===
+extern Tetromino shapes[7];
+
+// === Function Prototypes ===
+void Rotate_Clockwise(Tetromino* shape);
+void Draw_Tetromino(uint16_t originX, uint16_t originY, Tetromino shape, uint16_t borderColor);
+
+
+// === Typedef ===
+typedef void (*ShapeDrawFunc)(uint16_t x, uint16_t y, uint16_t borderColor);
+
+// === Shape Draw Functions ===
+void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+void Draw_J_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+void Draw_L_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+void Draw_O_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+void Draw_S_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+void Draw_T_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+void Draw_Z_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
+
+// === External Arrays ===
+extern ShapeDrawFunc shapeFunctions[7];
+extern const char* shapeNames[7];
+
+// === Game Shape Controls ===
+void Prepare_Next_Shape(void);
+void Draw_Current_Shape(int x, int y, uint16_t borderColor);
+void Test_Draw_All_Shapes(void);
+void Reset_Game(); // Declare reset function
+
+extern uint8_t gameGrid[24][14];
+extern Tetromino currentShape;
+extern int currentX, currentY;
+extern int currentRotation;
+extern int score;
+extern int level;
+
+void Rotate_Clockwise(Tetromino* shape);
+_Bool Check_Collision(int newX, int newY, Tetromino *shape);
+void Merge_Shape_Into_Grid();
+int Clear_Lines();
+void Update_Level_Speed();
+void Spawn_New_Shape();
+void Draw_Grid(void);
+
+void Rotate_Current_Block(void);
+void Move_Block_Left(void);
+void Move_Block_Right(void);
+void Drop_Block_Fast(void);
+# 14 "../main.c" 2
+
+
+
+
+
+
+// Add global variables (if not already declared)
+
+
+extern _Bool isPaused;
+extern GameState currentState;
+extern int score;
+extern int level;
+extern uint8_t gameGrid[24][14];
+# 36 "../main.c"
 extern volatile uint8_t Timer3_flag;
 extern volatile uint8_t Timer3_cnt;
 //volatile uint8_t Timer1_flag;
@@ -5900,6 +5996,12 @@ extern volatile uint8_t Timer3_cnt;
 
 volatile uint8_t Timer1_flag = 0;
 volatile uint8_t Timer1_cnt = 0;
+volatile uint8_t Timer0_flag = 0;
+volatile uint8_t Timer0_cnt = 0;
+volatile uint8_t timer_running = 1; // 1 = running, 0 = paused
+uint8_t seconds = 0;
+uint8_t minutes = 0;
+
 
 void SYS_Init(void)
 {
@@ -5966,6 +6068,11 @@ void SYS_Init(void)
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL1 |= (0b000 << 12); // Clock source from HXT
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->APBCLK0 |= (1 << 3); // Clock enable for Timer 1
 
+  // TM0 clock selection
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL1 &= ~ (0b111 << 8); // clear setting
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->CLKSEL1 |= (0b000 << 8); // Clock source from HXT
+  ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->APBCLK0 |= (1 << 2); // Clock enable for Timer 0
+
   // ((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL)) Controller Clock Enable Bit
   ((CLK_T *) (((uint32_t)0x40000000) + 0x00200UL))->AHBCLK |= (1 << 3);
 
@@ -6025,7 +6132,7 @@ void SYS_Init(void)
     ((SYS_T *) (((uint32_t)0x40000000) + 0x00000UL))->GPD_MFPL &= ~((0xF << 8) | (0xF << 12));
     ((SYS_T *) (((uint32_t)0x40000000) + 0x00000UL))->GPD_MFPL |= ((0x09 << 8) | (0x09 << 12));
 
-  SYS_LockReg(); // Lock the register
+  //SYS_LockReg(); // Lock the register
 }
 
 void TMR1_IRQHandler(void)
@@ -6046,10 +6153,10 @@ void Timer1_Init(void)
 {
   // Set Prescale
   ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL &= ~(0xFF << 0); // clear current setting for Prescale
-  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (0 << 0); // Prescale = (0+1) = 1
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL |= (11 << 0); // Prescale = (11+1) = 12
 
-
-    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CMP = 1199999;
+    // Duration = 0.5s => Target Tiner Count = 499999
+    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CMP = 499999;
 
   // Set TM1 operation mode to Periodic Mode
   ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10100UL))->CTL &= ~(0b11 << 27); // Clear current settings
@@ -6075,6 +6182,63 @@ void Timer1_Init(void)
 
 
     Timer1_cnt = 0;
+}
+
+void TMR0_IRQHandler(void)
+{
+  if (((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->INTSTS & (1 << 0))
+  {
+   ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->INTSTS = (1 << 0); // Clear Timer 0 overflow flag
+
+        // Only update time if game is running and not paused
+        //if (currentState == STATE_PLAY && !isPaused) {
+            Timer0_flag = 1; // Notify main loop to update time
+
+        //}
+  }
+}
+
+void Timer0_Init(void)
+{
+  // Set Prescale
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL &= ~(0xFF << 0); // clear current setting for Prescale
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (11 << 0); // Prescale = (11+1) = 12
+
+    // Duration = 1s => Target Tiner Count = 499999
+    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CMP = 999999;
+
+  // Set TM0 operation mode to Periodic Mode
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL &= ~(0b11 << 27); // Clear current settings
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (0b01 << 27); // Periodic Mode
+  // The behavior selection in periodic mode is Enabled.
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (1 << 20);
+  // Enable TM0 interrup flag TIF
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (1 << 29);
+
+  // Configure Interrupt
+  // Enable TM0 interrup flag TIF
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (1 << 29);
+  // ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) ) interrupt configuration
+  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[1] |= (1 << 0); // (32 - 32 = 0)
+  // Clear Timer 0 overflow flag
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->INTSTS = (1 << 0); // Write 1 to clear TIF
+
+  // TM0 Start Counting
+  ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (1 << 30);
+
+
+    Timer0_flag = 0;
+
+
+    Timer0_cnt = 0;
+}
+
+void Timer0_Start(void) {
+    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL |= (1 << 30); // Enable Timer0 counting
+}
+
+void Timer0_Stop(void) {
+    ((TIMER_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x10000UL))->CTL &= ~(1 << 30); // Disable Timer0 counting
 }
 
 void UART0_Config(void)
@@ -6152,6 +6316,7 @@ void SW1_Interrupt_Setup(void)
 {
   //Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0 (SW1) as input mode
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->MODE &= ~(0x3 << 0); // Clear bits [1:0] for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->PUSEL |= (1 << 0); // Enable pull-up resistor
 
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTTYPE &= ~(1 << 0); // Edge trigger interrupt for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTEN |= (1 << 0); // Falling edge interrupt enable
@@ -6162,49 +6327,114 @@ void SW1_Interrupt_Setup(void)
 }
 
 
-void GPA_IRQHandler(void)
-{
- if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC & (1 << 0)) // Check if the interrupt is from ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL)).0 (SW1)
-    {
-  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC |= (1 << 0); // Clear the interrupt flag
-
+void SW1_IRQHandler(void) {
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC & (1 << 0)) {
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04000UL))->INTSRC |= (1 << 0); // Clear interrupt flag
+# 407 "../main.c"
+   LCD_PutString(0, 172, (uint8_t *)"t la huy", 0xFFE0, 0x0000);
     }
 }
 
+// Joystick Interrupt
+
 void Joystick_Init(void)
 {
-    // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2(UP), ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4(RIGHT) as input mode
-    ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->MODE &= ~((0x3 << 4) | (0x3 << 8)); // ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2, ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4
-  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PUSEL &= ~((0x3 << 4) |
-         (0x3 << 8));
-  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PUSEL |= ((0x1 << 4) |
-         (0x1 << 8));
+  //Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2 (UP) as input mode
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->MODE &= ~(0x3 << 4); // Clear bits [5:4] for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2
 
-    // Set ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9(LEFT) and ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10(DOWN) as input mode
-    ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->MODE &= ~((0x3 << 18) | (0x3 << 20)); // ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9, ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10
-  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PUSEL &= ~((0x3 << 18) |
-          (0x3 << 20));
-  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PUSEL |= ((0x1 << 18) |
-          (0x1 << 20));
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTTYPE &= ~(1 << 2); // Edge trigger interrupt for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTEN |= (1 << 2); // Falling edge interrupt enable
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC |= (1 << 2); // Clear any pending interrupt flag for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2
+
+  //Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4 (RIGHT) as input mode
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->MODE &= ~(0x3 << 8); // Clear bits [9:8] for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4
+
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTTYPE &= ~(1 << 4); // Edge trigger interrupt for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTEN |= (1 << 4); // Falling edge interrupt enable
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC |= (1 << 4); // Clear any pending interrupt flag for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4
+
+  //Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9 (LEFT) as input mode
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->MODE &= ~(0x3 << 18); // Clear bits [19:18] for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9
+
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTTYPE &= ~(1 << 9); // Edge trigger interrupt for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTEN |= (1 << 9); // Falling edge interrupt enable
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC |= (1 << 9); // Clear any pending interrupt flag for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9
+
+  //Configure ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10 (DOWN) as input mode
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->MODE &= ~(0x3 << 20); // Clear bits [21:20] for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10
+
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTTYPE &= ~(1 << 10); // Edge trigger interrupt for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTEN |= (1 << 10); // Falling edge interrupt enable
+  ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC |= (1 << 10); // Clear any pending interrupt flag for ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10
+
+  // ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) ) interrupt configuration // GPG_INT
+
+  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[2] |= (1 << (72 - 64)); // Enable ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) ) for the ((GPIO_DBCTL_T *) (((uint32_t)0x40000000) + 0x04440UL)) interrupt on Port G -
+            // GPG_INT is bit 72 --> belong to ISER2 (64 to 95)
+  // GPC_INT
+  ((NVIC_Type *) ((0xE000E000UL) + 0x0100UL) )->ISER[0] |= (1 << 18);
+
+}
+void GPG_IRQHandler(void) { // ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).2 (UP) and ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL)).4 (RIGHT)
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC & (1 << 2)) { // UP: Rotate block
+        Rotate_Current_Block();
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC |= (1 << 2);
+    }
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC & (1 << 4)) { // RIGHT: Move right
+        Move_Block_Right();
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC |= (1 << 4);
+    }
 }
 
-void Joystick_Polling_Read(void)
-{
-    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PIN & (1 << 2))) // UP
-        printf("Joystick UP pressed\n");
-    //((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->DOUT |= (1 << 6); // toggle LED2
-
-    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->PIN & (1 << 4))) // RIGHT
-        printf("Joystick RIGHT pressed\n");
-    //((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL))->DOUT ^= (1 << 7); // toggle LED1
-
-    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PIN & (1 << 10))) // DOWN
-        printf("Joystick DOWN pressed\n");
-
-    if (!(((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->PIN & (1 << 9))) // LEFT
-        printf("Joystick LEFT pressed\n");
+void GPC_IRQHandler(void) { // ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).9 (LEFT), ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL)).10 (DOWN)
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC & (1 << 9)) { // LEFT: Move left
+        Move_Block_Left();
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC |= (1 << 9);
+    }
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC & (1 << 10)) { // DOWN: Drop faster
+        Drop_Block_Fast();
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC |= (1 << 10);
+    }
+}
+void GPIO_PG_IRQHandler(void) {
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC & (1 << 2)) { // UP: Rotate
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC = (1 << 2);
+        if (currentState == STATE_PLAY && !isPaused) {
+            Tetromino rotated = currentShape;
+            Rotate_Clockwise(&rotated);
+            if (!Check_Collision(currentX, currentY, &rotated)) {
+                currentShape = rotated;
+            }
+        }
+    }
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC & (1 << 4)) { // RIGHT
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04180UL))->INTSRC = (1 << 4);
+        if (currentState == STATE_PLAY && !isPaused && !Check_Collision(currentX + 1, currentY, &currentShape)) {
+            currentX++;
+        }
+    }
 }
 
+void GPIO_PC_IRQHandler(void) {
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC & (1 << 9)) { // LEFT
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC = (1 << 9);
+        if (currentState == STATE_PLAY && !isPaused && !Check_Collision(currentX - 1, currentY, &currentShape)) {
+            currentX--;
+        }
+    }
+    if (((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC & (1 << 10)) { // DOWN: Hard drop
+        ((GPIO_T *) (((uint32_t)0x40000000) + 0x04080UL))->INTSRC = (1 << 10);
+        if (currentState == STATE_PLAY && !isPaused) {
+            while (!Check_Collision(currentX, currentY + 1, &currentShape)) {
+                currentY++;
+            }
+            Merge_Shape_Into_Grid();
+            int lines = Clear_Lines();
+            if (lines > 0) score += lines;
+            Spawn_New_Shape();
+        }
+    }
+}
 
 
 
@@ -6224,26 +6454,15 @@ int32_t main(void)
 
 
 
+
+    SYS_UnlockReg();
     SYS_Init();
   Joystick_Init();
 
 
-    //UART_Open(((UART_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x30000UL)), 115200);
   UART0_Config();
 
-   printf("\n");
-    printf("+---------------------------------------------------------+\n");
-    printf("|            M487 LCD Display with Touch Function         |\n");
-    printf("+---------------------------------------------------------+\n");
-    printf("HXT clock %d Hz\n", CLK_GetHXTFreq());
-    printf("CPU clock %d Hz\n", CLK_GetCPUFreq());
-
-
-    //EBI_Open(0UL, 16UL, 0x3UL, 0, 0UL);
-    //((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->CTL0 |= (0x1ul << (4));
-    //((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->TCTL0 |= ((0x1ul << (23)) | (0x1ul << (22)));
   EBI_Config();
-    printf("\n[EBI CTL0:0x%08X, TCLT0:0x%08X]\n\n", ((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->CTL0, ((EBI_T *) (((uint32_t)0x40000000) + 0x10000UL))->TCTL0);
 
 
     ILI9341_Initial();
@@ -6253,22 +6472,25 @@ int32_t main(void)
   ((GPIO_T *) (((uint32_t)0x40000000) + 0x04040UL))->DOUT |= (1 << 7);
 
 
-    //GPIO_SetMode(((GPIO_T *) (((uint32_t)0x40000000) + 0x041C0UL)), (0x00000080UL) ///< Bit 7 mask of an 32 bit integer|(0x00000040UL) ///< Bit 6 mask of an 32 bit integer, 0x1UL);
-    //(*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(7))) + ((7)<<2)))) = 1;
-    //(*((volatile uint32_t *)(((((uint32_t)0x40000000) + 0x04800UL)+(0x40*(7))) + ((6)<<2)))) = 1;
   GPIO_Config();
 
 
 
-    // EADC_Open(((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL)), (0UL<<(8)));
-  //((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL))->CTL &= ~(1 << 0); // set the Single-end input mode
-  //EADC_Open(((EADC_T *) ((((uint32_t)0x40000000) + (uint32_t)0x00040000) + 0x03000UL)), (0UL<<(8)));
   EADC_Config();
 
     //Timer3_Init();
 
 
     Timer1_Init();
+
+
+    Timer0_Init();
+  SW1_Interrupt_Setup();
+
+
+    SYS_LockReg();
+  // Initialize game state
+    SetState(STATE_WELCOME);
 
 
     LCD_BlankArea(0, 0, 240 // LCD Width at pixels, 320 // LCD Hight at pixels, 0x0000);
@@ -6278,35 +6500,46 @@ int32_t main(void)
   LCD_PutString(0, 160, (uint8_t *)"Design and Implementation", 0xFFE0, 0x0000);
 
 
-    Timer1_cnt = 0;
-    while(Timer1_cnt < 30) {};
+    //Timer3_cnt = 0;
+    //while(Timer3_cnt < 30) {};
 
 
 
     LCD_BlankArea(0, 0, 240 // LCD Width at pixels, 320 // LCD Hight at pixels, 0x0000);
-  LCD_PutString(0, 144, (uint8_t *)"Please touch the screen of LCD", 0xFFE0, 0x0000);
-    while(1) {
+  LCD_PutString(0, 172, (uint8_t *)"Please touch the screen of LCD", 0xFFE0, 0x0000);
 
-        if(Timer1_flag == 1) {
-            Timer1_flag = 0;
+   while(1) {
 
-      Joystick_Polling_Read();
-
-
-            x = Get_TP_X();
-            y = Get_TP_Y();
-
-      if ((x != 240 // LCD Width at pixels - 1) && (y != 320 // LCD Hight at pixels - 1)) {
-        if (touch_count == 0 && !rect_drawn) {
-          LCD_Picture(0, 0, 240, 320, WelcomeScreen);
-          rect_drawn = 1;
-          touch_count++;
-        }
-        else if (touch_count == 1){
-         gameLoop();
-        }
-      }
+    // Handle Timer0 for time updates
+    if (Timer0_flag == 1) {
+        Timer0_flag = 0;
+    LCD_PutString(0, 172, (uint8_t *)"hehehe", 0xFFE0, 0x0000);
+        //if (currentState == STATE_PLAY && !isPaused) {
+            seconds++;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+            }
+            LCD_DisplayTime(minutes, seconds);
+        //}
     }
-  }
+
+    // Handle game state transitions
+    switch (currentState) {
+        case STATE_WELCOME:
+            // Wait for SW1 press (handled by interrupt)
+            break;
+        case STATE_PLAY:
+            gameLoop(); // Run the game
+            break;
+        case STATE_PAUSE:
+        case STATE_GAME_OVER:
+        case STATE_HIGH_SCORE:
+            // States handled by interrupts
+            break;
+    default:
+     break;
+    }
+}
 
 }

@@ -391,13 +391,22 @@ void Draw_J_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
+void LCD_DisplayTime(uint8_t min, uint8_t sec);
 # 3 "gameState.c" 2
 # 1 ".\\gameLogic.h" 1
 
-typedef enum { false, true } bool;
 
-extern bool isPaused;
+
+//typedef enum { false, true } bool;
+# 1 "C:\\Users\\admin\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdbool.h" 1 3
+# 6 ".\\gameLogic.h" 2
+
+
+
+
+extern _Bool isPaused;
 extern int nextShapeIndex; // Holds next shape to appear
+extern int x, y; // Declare as extern to share across files
 
 // === Block and Tetromino ===
 typedef struct {
@@ -408,6 +417,9 @@ typedef struct {
     Block blocks[4]; // A tetromino has 4 blocks
     uint16_t color; // 16-bit RGB565 color
 } Tetromino;
+
+extern Tetromino currentShape;
+extern int currentX, currentY;
 
 // === All 7 Tetromino Shapes ===
 extern Tetromino shapes[7];
@@ -437,6 +449,27 @@ extern const char* shapeNames[7];
 void Prepare_Next_Shape(void);
 void Draw_Current_Shape(int x, int y, uint16_t borderColor);
 void Test_Draw_All_Shapes(void);
+void Reset_Game(); // Declare reset function
+
+extern uint8_t gameGrid[24][14];
+extern Tetromino currentShape;
+extern int currentX, currentY;
+extern int currentRotation;
+extern int score;
+extern int level;
+
+void Rotate_Clockwise(Tetromino* shape);
+_Bool Check_Collision(int newX, int newY, Tetromino *shape);
+void Merge_Shape_Into_Grid();
+int Clear_Lines();
+void Update_Level_Speed();
+void Spawn_New_Shape();
+void Draw_Grid(void);
+
+void Rotate_Current_Block(void);
+void Move_Block_Left(void);
+void Move_Block_Right(void);
+void Drop_Block_Fast(void);
 # 4 "gameState.c" 2
 # 1 "./Library/Device/Nuvoton/M480/Include\\NuMicro.h" 1
 # 12 "./Library/Device/Nuvoton/M480/Include\\NuMicro.h"
@@ -5884,10 +5917,8 @@ void HSUSBD_SetVendorRequest(HSUSBD_VENDOR_REQ pfnVendorReq);
 # 13 "./Library/Device/Nuvoton/M480/Include\\NuMicro.h" 2
 # 5 "gameState.c" 2
 # 1 ".\\gameState.h" 1
-
-
-
-typedef enum uint8_t {
+# 15 ".\\gameState.h"
+typedef enum {
     STATE_WELCOME,
     STATE_WAIT_FOR_START,
     STATE_PLAY,
@@ -5896,11 +5927,39 @@ typedef enum uint8_t {
     STATE_HIGH_SCORE
 } GameState;
 
-extern GameState currentState;
+extern GameState currentState; // Declare global state variable
+extern _Bool isPaused; // Declare pause flag
+
+//extern GameState currentState;
 
 void SetState(GameState newState);
 void UpdateGameState(void);
 # 6 "gameState.c" 2
+
+# 1 ".\\../EBI_LCD_Module.h" 1
+# 28 ".\\../EBI_LCD_Module.h"
+// Characters
+extern uint8_t Font8x16[];
+extern uint16_t Font16x32[];
+extern const uint16_t gImage_Dog[240*320];
+
+// Sub-functions
+void ILI9341_Initial(void);
+void Timer3_Init(void);
+void LCD_WR_REG(uint16_t cmd);
+void LCD_WR_DATA(uint16_t dat);
+uint16_t LCD_RD_DATA(void);
+void LCD_SetWindow(uint16_t x_s, uint16_t x_e, uint16_t y_s, uint16_t y_e);
+void LCD_PutString(uint16_t x, uint16_t y, uint8_t *s, uint32_t fColor, uint32_t bColor);
+void LCD_PutChar16x32(uint16_t x, uint16_t y, uint16_t c, uint32_t fColor, uint32_t bColor);
+void LCD_BlankArea(uint16_t X, uint16_t Y, uint16_t W, uint16_t H, uint16_t color);
+uint16_t Get_TP_X(void);
+uint16_t Get_TP_Y(void);
+
+// Custom
+# 8 "gameState.c" 2
+
+_Bool isPaused = 0;
 
 GameState currentState = STATE_WELCOME;
 
@@ -5913,24 +5972,33 @@ void SetState(GameState newState) {
             break;
 
         case STATE_WAIT_FOR_START:
+            LCD_BlankArea(0, 0, 240 // LCD Width at pixels, 320 // LCD Hight at pixels, 0x0000);
             LCD_PutString(40, 150, (uint8_t *)"Press SW1 to Start", 0xFFFF, 0x0000);
             break;
 
         case STATE_PLAY:
             LCD_Picture(0, 0, 240, 320, backgroundScreenPlay);
-            Draw_Current_Shape(80, 40, 0x0000 // Black border);
+            Draw_Current_Shape(80, 40, 0x0000 // Black);
+      Timer0_Start(); // Resume time counting
             break;
 
         case STATE_PAUSE:
             LCD_PutString(60, 150, (uint8_t *)"PAUSED", 0xFFE0 // O shape, 0x0000);
+      Timer0_Stop(); // Freeze time
             break;
 
         case STATE_GAME_OVER:
-            LCD_PutString(40, 150, (uint8_t *)"GAME OVER", 0xF800 // Z shape, 0x0000);
-            break;
+      LCD_BlankArea(0, 0, 240 // LCD Width at pixels, 320 // LCD Hight at pixels, 0x0000);
+      LCD_PutString(40, 150, (uint8_t *)"GAME OVER", 0xF800 // Z shape, 0x0000);
+      LCD_PutString(40, 170, (uint8_t *)"Score: ", 0xFFFF, 0x0000);
+      char scoreStr[10];
+      sprintf(scoreStr, "%d", score);
+      LCD_PutString(100, 170, (uint8_t *)scoreStr, 0xFFE0 // O shape, 0x0000);
+      //Save_High_Score(score); // Implement Flash saving
+      break;
 
         case STATE_HIGH_SCORE:
-            LCD_PutString(20, 150, (uint8_t *)"HIGH SCORES:", 0x07E0 // S shape, 0x0000);
+           // LCD_PutString(20, 150, (uint8_t *)"HIGH SCORES:", 0x07E0 // S shape, 0x0000);
             // TODO: display high score values
             break;
     }

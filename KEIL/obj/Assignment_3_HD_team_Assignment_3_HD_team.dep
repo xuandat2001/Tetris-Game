@@ -88,7 +88,7 @@ I (Library\StdDriver\inc\hsusbd.h)(0x682F094D)
 I (Library\StdDriver\inc\otg.h)(0x682F094D)
 I (Library\StdDriver\inc\hsotg.h)(0x682F094D)
 F (.\Library\Device\Nuvoton\M480\Source\ARM\startup_M480.s)(0x682F094D)(--target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4 -Wa,armasm,--pd,"__MICROLIB SETA 1"-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 541"-o ./obj/startup_m480.o)
-F (..\main.c)(0x682F58FF)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/main.o -MMD)
+F (..\main.c)(0x6830B8EA)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/main.o -MMD)
 I (Library\Device\Nuvoton\M480\Include\NuMicro.h)(0x682F094D)
 I (Library\Device\Nuvoton\M480\Include\M480.h)(0x682F094D)
 I (Library\CMSIS\Include\core_cm4.h)(0x682F094D)
@@ -176,9 +176,10 @@ I (Library\StdDriver\inc\hsusbd.h)(0x682F094D)
 I (Library\StdDriver\inc\otg.h)(0x682F094D)
 I (Library\StdDriver\inc\hsotg.h)(0x682F094D)
 I (..\EBI_LCD_Module.h)(0x682F094D)
-I (..\KEIL\gameHeader.h)(0x682F556C)
-I (..\KEIL\gameState.h)(0x682F54C8)
-F (..\EBI_LCD_Module.c)(0x682F094D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/ebi_lcd_module.o -MMD)
+I (..\KEIL\gameHeader.h)(0x68303FDA)
+I (..\KEIL\gameState.h)(0x6830AADB)
+I (..\KEIL\gameLogic.h)(0x6830A9CF)
+F (..\EBI_LCD_Module.c)(0x68303FDA)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/ebi_lcd_module.o -MMD)
 I (Library\Device\Nuvoton\M480\Include\NuMicro.h)(0x682F094D)
 I (Library\Device\Nuvoton\M480\Include\M480.h)(0x682F094D)
 I (Library\CMSIS\Include\core_cm4.h)(0x682F094D)
@@ -441,8 +442,8 @@ I (Library\StdDriver\inc\hsusbd.h)(0x682F094D)
 I (Library\StdDriver\inc\otg.h)(0x682F094D)
 I (Library\StdDriver\inc\hsotg.h)(0x682F094D)
 F (.\picture.c)(0x682F094D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/picture.o -MMD)
-F (.\gameHeader.h)(0x682F556C)()
-F (.\gameLoop.c)(0x682F5705)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/gameloop.o -MMD)
+F (.\gameHeader.h)(0x68303FDA)()
+F (.\gameLoop.c)(0x6830B65D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/gameloop.o -MMD)
 I (Library\Device\Nuvoton\M480\Include\NuMicro.h)(0x682F094D)
 I (Library\Device\Nuvoton\M480\Include\M480.h)(0x682F094D)
 I (Library\CMSIS\Include\core_cm4.h)(0x682F094D)
@@ -529,13 +530,13 @@ I (Library\StdDriver\inc\usbd.h)(0x682F094D)
 I (Library\StdDriver\inc\hsusbd.h)(0x682F094D)
 I (Library\StdDriver\inc\otg.h)(0x682F094D)
 I (Library\StdDriver\inc\hsotg.h)(0x682F094D)
-I (gameState.h)(0x682F54C8)
-I (gameHeader.h)(0x682F556C)
+I (gameState.h)(0x6830AADB)
+I (gameHeader.h)(0x68303FDA)
 I (..\EBI_LCD_Module.h)(0x682F094D)
-I (gameLogic.h)(0x682F094D)
+I (gameLogic.h)(0x6830A9CF)
 F (.\WelcomeScreen.c)(0x682F094D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/welcomescreen.o -MMD)
 F (.\backgroundScreenPlay.c)(0x682F094D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/backgroundscreenplay.o -MMD)
-F (.\gameLogic.c)(0x682F094D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/gamelogic.o -MMD)
+F (.\gameLogic.c)(0x6830A9CF)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/gamelogic.o -MMD)
 I (Library\Device\Nuvoton\M480\Include\NuMicro.h)(0x682F094D)
 I (Library\Device\Nuvoton\M480\Include\M480.h)(0x682F094D)
 I (Library\CMSIS\Include\core_cm4.h)(0x682F094D)
@@ -622,14 +623,15 @@ I (Library\StdDriver\inc\usbd.h)(0x682F094D)
 I (Library\StdDriver\inc\hsusbd.h)(0x682F094D)
 I (Library\StdDriver\inc\otg.h)(0x682F094D)
 I (Library\StdDriver\inc\hsotg.h)(0x682F094D)
-I (gameLogic.h)(0x682F094D)
-I (gameHeader.h)(0x682F556C)
+I (gameLogic.h)(0x6830A9CF)
+I (gameHeader.h)(0x68303FDA)
+I (gameState.h)(0x6830AADB)
 I (..\EBI_LCD_Module.h)(0x682F094D)
-F (.\gameLogic.h)(0x682F094D)()
-F (.\gameState.h)(0x682F54C8)()
-F (.\gameState.c)(0x682F54C8)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/gamestate.o -MMD)
-I (gameHeader.h)(0x682F556C)
-I (gameLogic.h)(0x682F094D)
+F (.\gameLogic.h)(0x6830A9CF)()
+F (.\gameState.h)(0x6830AADB)()
+F (.\gameState.c)(0x6830AACE)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/gamestate.o -MMD)
+I (gameHeader.h)(0x68303FDA)
+I (gameLogic.h)(0x6830A9CF)
 I (Library\Device\Nuvoton\M480\Include\NuMicro.h)(0x682F094D)
 I (Library\Device\Nuvoton\M480\Include\M480.h)(0x682F094D)
 I (Library\CMSIS\Include\core_cm4.h)(0x682F094D)
@@ -716,7 +718,8 @@ I (Library\StdDriver\inc\usbd.h)(0x682F094D)
 I (Library\StdDriver\inc\hsusbd.h)(0x682F094D)
 I (Library\StdDriver\inc\otg.h)(0x682F094D)
 I (Library\StdDriver\inc\hsotg.h)(0x682F094D)
-I (gameState.h)(0x682F54C8)
+I (gameState.h)(0x6830AADB)
+I (..\EBI_LCD_Module.h)(0x682F094D)
 F (.\Library\StdDriver\src\clk.c)(0x682F094D)(-xc -std=c90 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O2 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./Library/CMSIS/Include -I ./Library/Device/Nuvoton/M480/Include -I ./Library/StdDriver/inc-IC:/Users/admin/AppData/Local/Keil_v5/ARM/RV31/INC-IC:/Users/admin/AppData/Local/Keil_v5/ARM/CMSIS/Include-D__UVISION_VERSION="541"-o ./obj/clk.o -MMD)
 I (Library\Device\Nuvoton\M480\Include\NuMicro.h)(0x682F094D)
 I (Library\Device\Nuvoton\M480\Include\M480.h)(0x682F094D)

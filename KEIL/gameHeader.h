@@ -47,3 +47,4 @@ void Draw_J_Shape(uint16_t x, uint16_t y,  uint16_t borderColor);
 void Draw_I_Shape(uint16_t x, uint16_t y, uint16_t borderColor);
 void LCD_Draw_Border();
 void gameLoop();
+void LCD_DisplayTime(uint8_t min, uint8_t sec);

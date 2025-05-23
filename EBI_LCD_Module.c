@@ -352,7 +352,6 @@ void LCD_PutString(uint16_t x, uint16_t y, uint8_t *s, uint32_t fColor, uint32_t
             l++;
         }
     }
-
 }
 
 /**
