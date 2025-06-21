@@ -1,4 +1,4 @@
-# 🧩 Tetris Game on Nuvoton M487 Board (EEET2481 Assessment 3)
+# 🧩 Tetris Game on Nuvoton M487 Board
 
 ## 📘 Project Summary
 
